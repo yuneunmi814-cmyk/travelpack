@@ -219,12 +219,21 @@ adminContentRouter.get(
       },
       orderBy: { id: 'desc' },
       take: limit,
-      include: { region: { select: { name: true } }, creator: { select: { name: true } }, _count: { select: { items: true } } },
+      include: {
+        region: { select: { name: true } },
+        creator: { select: { name: true } },
+        author: { select: { nickname: true } },
+        _count: { select: { items: true } },
+      },
     })
     ok(res, {
       items: items.map((c) => ({
         id: c.id, title: c.title, region: c.region.name, status: c.status, durationDays: c.durationDays,
-        spotCount: c._count.items, createdBy: c.creator.name, publishedAt: c.publishedAt, saveCount: c.saveCount,
+        spotCount: c._count.items,
+        authorType: c.authorType,
+        createdBy: c.creator?.name ?? (c.author ? `${c.author.nickname} (크리에이터)` : '—'),
+        price: c.price, salesCount: c.salesCount,
+        publishedAt: c.publishedAt, saveCount: c.saveCount,
       })),
       nextCursor: nextCursorOf(items, limit),
     })
@@ -293,7 +302,7 @@ async function transition(
   from: string[],
   to: 'IN_REVIEW' | 'PUBLISHED' | 'DRAFT' | 'ARCHIVED',
   action: string,
-  guard?: (course: { createdBy: bigint }) => void,
+  guard?: (course: { createdBy: bigint | null }) => void,
 ) {
   const course = await prisma.course.findUnique({ where: { id } })
   if (!course) throw Errors.notFound('코스')

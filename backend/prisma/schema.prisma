@@ -29,6 +29,11 @@ enum ConsentType {
   NIGHT_PUSH
 }
 
+enum CourseAuthorType {
+  EDITOR
+  USER
+}
+
 enum ContentStatus {
   DRAFT
   IN_REVIEW
@@ -112,6 +117,8 @@ model User {
   trips      Trip[]
   reviews    Review[]
   reports    ReviewReport[]
+  authoredCourses Course[]        @relation("authoredCourses")
+  purchases       CoursePurchase[]
 
   @@unique([provider, providerId])
   @@map("users")
@@ -286,21 +293,55 @@ model Course {
   publishedAt   DateTime?     @map("published_at")
   viewCount     Int           @default(0) @map("view_count")
   saveCount     Int           @default(0) @map("save_count")
-  createdBy     BigInt        @map("created_by")
+  createdBy     BigInt?       @map("created_by")    // 에디터(관리자) 작성 시
   source        String        @default("EDITOR")
   tourapiContentId String?    @unique @map("tourapi_content_id")
+  // 크리에이터 마켓플레이스
+  authorType    CourseAuthorType @default(EDITOR) @map("author_type")
+  authorUserId  BigInt?       @map("author_user_id")  // 사용자(크리에이터) 작성 시
+  price         Int           @default(0)              // KRW, 0 = 무료
+  salesCount    Int           @default(0) @map("sales_count")
   createdAt     DateTime      @default(now()) @map("created_at")
   updatedAt     DateTime      @updatedAt @map("updated_at")
 
-  region  Region        @relation(fields: [regionId], references: [id])
-  creator AdminUser     @relation(fields: [createdBy], references: [id])
-  themes  CourseTheme[]
-  items   CourseItem[]
-  trips   Trip[]
+  region     Region          @relation(fields: [regionId], references: [id])
+  creator    AdminUser?      @relation(fields: [createdBy], references: [id])
+  author     User?           @relation("authoredCourses", fields: [authorUserId], references: [id])
+  themes     CourseTheme[]
+  items      CourseItem[]
+  trips      Trip[]
+  purchases  CoursePurchase[]
 
   @@index([status, regionId])
   @@index([status, saveCount, id])
+  @@index([authorType, status, id])
   @@map("courses")
+}
+
+enum PurchaseStatus {
+  PENDING
+  PAID
+  REFUNDED
+}
+
+// 코스 구매 이용권(entitlement). 무료 코스는 구매 없이 접근.
+model CoursePurchase {
+  id          BigInt         @id @default(autoincrement())
+  courseId    BigInt         @map("course_id")
+  userId      BigInt         @map("user_id")
+  price       Int            // 구매 시점 가격(원)
+  status      PurchaseStatus @default(PENDING)
+  provider    String?        // PG사(portone/toss…) — 무료는 null
+  paymentId   String?        @map("payment_id")  // PG 거래 식별자
+  purchasedAt DateTime?      @map("purchased_at")
+  createdAt   DateTime       @default(now()) @map("created_at")
+
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([courseId, userId])
+  @@index([userId, status])
+  @@map("course_purchases")
 }
 
 model CourseTheme {

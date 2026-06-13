@@ -653,7 +653,8 @@ sequenceDiagram
 | 회원 User | `/auth/signup`, `/auth/social` (본인) | `/users/me` (본인) · `/admin/users` (운영자, 마스킹) | `/users/me` (본인) · `/admin/users/{id}/status` (운영자) | `/users/me` (본인 탈퇴) | **Soft delete → 30일 후 배치 완전 파기.** 관리자는 삭제 불가(제재만) |
 | 동의 Consent | 가입·설정 변경 시 자동 append | `/users/me/consents` | 신규 행 append (UPDATE 금지) | 불가 | 불변 이력 — 법적 입증 자료 |
 | 관광지 Spot | `/admin/spots` (CONTENT) | `/spots/{id}` (공개) · `/admin/spots` | `/admin/spots/{id}` (CONTENT) | `/admin/spots/{id}` | 코스에 포함된 스팟은 409 → **비활성화로 대체** |
-| 코스 Course | `/admin/courses` (CONTENT, DRAFT 생성) | `/courses` · `/courses/{id}` (PUBLISHED만 공개) · `/admin/courses` (전 상태) | `/admin/courses/{id}` + `publish/reject/unpublish` (상태 전이) | 발행 이력 있으면 **ARCHIVED 전환만** | 진행 중인 사용자 여행 보호. 발행/수정 시 Redis 캐시 무효화 |
+| 코스 Course | `/admin/courses` (CONTENT, DRAFT 생성) · **`/me/courses` (크리에이터, authorType=USER DRAFT 생성)** | `/courses` · `/courses/{id}` (PUBLISHED만 공개, 유료는 이용권 게이트) · `/admin/courses` (전 상태) · `/me/courses` (본인 작성분 전 상태) · `/marketplace/courses` (USER 발행분) | `/admin/courses/{id}` + `publish/reject/unpublish` · **`/me/courses/{id}` (작성자, DRAFT만) + `submit/withdraw`** | 발행 이력 있으면 **ARCHIVED 전환만** · 크리에이터는 DRAFT만 삭제 | 진행 중인 사용자 여행 보호. 발행/수정 시 Redis 캐시 무효화. **USER 코스 발행은 관리자 검수(4-eyes: 작성자=사용자≠승인자=관리자)** |
+| 구매 CoursePurchase | `/marketplace/courses/{id}/purchase` (본인 — 무료 즉시·유료 PG) | `/me/purchases` (본인 이용권) | 시스템(PG 콜백으로 PENDING→PAID) | 불가 (환불은 status=REFUNDED 전이) | **이용권(entitlement) 원장** — `(course,user)` 유니크. 멱등 구매. 정산·환불 이력 보존 |
 | 북마크 Bookmark | `/bookmarks` (본인) | `/users/me/bookmarks` | — (생성/삭제만 존재) | `/bookmarks?targetType&targetId` | Hard delete (이력 불필요). `save_count` 비동기 증감 |
 | 여행 Trip | `/trips` (본인 — visits 자동 생성) | `/trips/me` · `/trips/{id}` (본인만) | `/trips/{id}` (날짜·상태) | `/trips/{id}` (본인) | Hard delete 허용, 통계는 사전 집계분만 유지 |
 | 방문 Visit | 여행 생성 시 **시스템 자동 생성** | `/trips/{id}` 응답에 포함 | `check-in` · `skip` (상태 전이 전용) | 여행 삭제 시 CASCADE | 체크인 좌표 6개월 후 배치 NULL 처리(위치정보 최소 보관) |
@@ -684,6 +685,10 @@ sequenceDiagram
 | 인프라 | RDS 백업·복구 리허설, 오토스케일링 부하 테스트 | 인프라 |
 | 데이터 | 시드 콘텐츠 — 최소 5개 지역 × 지역당 코스 4개 × 코스당 스팟 6~8개 (TourAPI 시드 + 에디터 가공) | 콘텐츠 |
 | 데이터 | TourAPI **운영계정 전환**(활용사례 등록·트래픽 증대 신청) + 앱 내 출처·이미지 저작권 표기 검수 | 콘텐츠/개발 |
+| 법무(마켓) | **통신판매업 신고**(플랫폼 사업자) + 크리에이터 거래 **통신판매중개자 지위·고지**(전자상거래법 §20) — 7장 참조 | 사업/법무 |
+| 법무(마켓) | **전자상거래법 청약철회 정책** 수립 — 디지털콘텐츠 열람(잠금 해제) 시점 철회 제한 고지 + 결제 전 명시 동의 UI | 법무/기획 |
+| 법무(마켓) | **정산·세무** — 크리에이터 사업자/비사업자 구분, 비사업자 지급 시 **기타소득 원천징수(3.3%)**·지급명세서, PG 정산 주기·보증보험 | 재무/법무 |
+| 보안(마켓) | 결제 위·변조 검증(서버 금액 대조·PG 웹훅 서명 검증), 페이월 우회(여행 시작·상세) 회귀 테스트 | 보안/개발 |
 
 ### 6.2 오픈 이슈 결정 사항 (2026-06-13 확정)
 
@@ -735,3 +740,67 @@ sequenceDiagram
 | M3 안드로이드 앱 | 6주 (M2와 2주 중첩) | 전체 화면 + 가이드 모드 |
 | M4 통합 QA·보안 점검 | 2주 | 침투 테스트, 스토어 심사 제출 |
 | 출시 | — | 클로즈드 베타(지역 1곳) → 정식 오픈 |
+| M5 크리에이터 마켓플레이스 | 3주 (출시 후) | 사용자 코스 작성·검수·판매(7장). 백엔드·이용권·결제 어댑터 구현 완료, **PG 실연동·통신판매업/정산 법무·모바일 UI**가 출시 게이트 |
+
+---
+
+## 7. 크리에이터 마켓플레이스 (사용자 코스 판매)
+
+> **"내 여행 노하우가 담긴 코스를 만들어 공개하고, 사고팔 수 있다."**
+> 일반 사용자가 자신만의 여행팩(코스)을 직접 구성해 무료로 공개하거나 유료로 판매하는 C2C 마켓플레이스. 큐레이션의 공급을 에디터(공식)에서 **크리에이터(사용자)**로 확장해 콘텐츠 다양성과 수익 동기를 동시에 확보한다.
+
+### 7.1 사용자 시나리오
+
+- **크리에이터(판매자)**: 기존 큐레이션 관광지(spot) 풀에서 스팟을 골라 일자·순서·체류시간·이동수단·꿀팁을 엮어 코스를 작성(DRAFT) → 가격 책정(0=무료/유료) → **검수 요청**(IN_REVIEW) → 관리자 승인 시 발행(PUBLISHED), 마켓에 노출. 판매 발생 시 수수료 차감 후 정산.
+- **구매자**: 마켓에서 코스 탐색 → 상세에서 **1일차 미리보기**(잠금) 확인 → 무료는 즉시 이용권, 유료는 결제 → 잠금 해제 후 전체 일정 열람 + **이 코스로 여행 시작(가이드 모드)**.
+
+> 크리에이터는 **신규 관광지(spot)를 생성하지 않는다.** 코스는 검증된 좌표 POI(에디터·TourAPI 수급분)의 **조합**으로만 구성 → 데이터 품질·체크인 정확도·저작권 리스크를 통제. 신규 장소 제안은 별도 신고 채널(차기).
+
+### 7.2 데이터 모델
+
+- **Course 확장**: `author_type`(EDITOR|USER), `author_user_id`(FK User, USER 코스일 때), `created_by`(FK AdminUser, **nullable** — 에디터 코스일 때만), `price`(원, 0=무료), `sales_count`. 기존 EDITOR 코스는 `author_type=EDITOR`·`price=0`으로 동작 불변.
+- **CoursePurchase(이용권 원장)**: `(course_id, user_id)` **유니크** · `price`(구매 시점 가격) · `status`(PENDING|PAID|REFUNDED) · `provider`/`payment_id`(PG 거래 식별자) · `purchased_at`. 무료 코스는 행을 만들지 않고 규칙으로 접근 허용.
+- **이용권(entitlement) 판정** = 다음 중 하나면 전체 열람 허용: ① 무료(price≤0) ② 작성자 본인 ③ PAID 구매 보유. 그 외 유료 코스는 **LOCKED(미리보기)**. (`src/modules/marketplace/entitlement.ts`)
+
+### 7.3 API 요약
+
+| 구분 | 메서드·경로 | 인증 | 비고 |
+|---|---|---|---|
+| 작성 | `POST /me/courses` | 사용자 | DRAFT·authorType=USER 생성(구성 정합성 검증) |
+| 목록/상세 | `GET /me/courses`, `GET /me/courses/{id}` | 사용자(본인) | 전 상태·전체 콘텐츠 |
+| 수정 | `PUT /me/courses/{id}` | 사용자(본인) | **DRAFT만** 가능, 테마·아이템 전체 교체 |
+| 검수요청/회수 | `POST /me/courses/{id}/submit`·`/withdraw` | 사용자(본인) | DRAFT↔IN_REVIEW (submit 시 스팟 1개 이상 필수) |
+| 삭제 | `DELETE /me/courses/{id}` | 사용자(본인) | DRAFT만 |
+| 발행 | `POST /admin/courses/{id}/publish` | 관리자(CONTENT) | 기존 4-eyes 워크플로 재사용(작성자=사용자≠승인자=관리자) |
+| 마켓 목록 | `GET /marketplace/courses?sort=popular\|latest\|free` | 공개 | PUBLISHED·authorType=USER, 가격·작성자·판매수 카드 |
+| 상세(게이트) | `GET /courses/{id}` | 선택 | `locked`·`entitlementReason`·`price`·`author` 포함, 잠금 시 1일차 미리보기 |
+| 구매 | `POST /marketplace/courses/{id}/purchase` | 사용자 | 무료 즉시·유료 PG. 멱등(보유 시 `alreadyOwned`) |
+| 내 구매 | `GET /me/purchases` | 사용자 | PAID 이용권 목록 |
+
+### 7.4 페이월(미리보기) 정책
+
+유료 코스 미구매자에게 상세는 **1일차 항목만, 그것도 스팟명·카테고리·썸네일까지**로 제한하고 **좌표·메모·이동정보·2일차 이후는 잠금**. 페이월 우회 차단을 위해 **여행 생성(`POST /trips`)도 이용권을 검사**(미보유 시 403) — 가이드 모드 경유 노출을 봉쇄. (회귀 테스트로 고정: `tests/marketplace.test.ts`)
+
+### 7.5 결제·정산
+
+- **PG 어댑터 게이팅**: S3/FCM과 동일 패턴. `PG_PROVIDER`+`PG_API_SECRET` 미설정 시 유료 구매는 **503(NOT_CONFIGURED)**, 무료 코스는 정상. 실제 PG(포트원/토스 등)는 `payment.ts`의 transport 교체로 연동, 테스트는 mock 주입. (`src/modules/marketplace/payment.ts`)
+- **결제 흐름**: PENDING 행 확보(재시도 멱등) → `charge()` 승인 → 성공 시 PAID·`sales_count` 증가(트랜잭션), 실패 시 **409 PAYMENT_FAILED·이용권 미부여**. 운영 연동 시 **서버 금액 대조 + PG 웹훅 서명 검증** 필수.
+- **정산**: 플랫폼 수수료 기본 **20%**(`MARKETPLACE_FEE_PERCENT`). 정산식 = 크리에이터 몫 `floor(가격 × (1−수수료율))`, 플랫폼 `가격 − 크리에이터몫`. 구매 응답에 `settlement` 동봉(예: 12,000원 → 플랫폼 2,400 / 크리에이터 9,600).
+
+### 7.6 검수·품질·어뷰징
+
+- **검수(모더레이션)**: USER 코스는 기존 관리자 CMS 발행 워크플로를 그대로 탄다 — 작성자가 사용자이므로 **4-eyes가 자연 성립**(승인자는 항상 관리자). 표절·저작권 침해·부적절·허위 정보·과장 가격을 승인 단계에서 차단. 발행 후 신고 누적 시 관리자 ARCHIVED 전환.
+- **저작권**: 코스의 텍스트(꿀팁·설명)는 크리에이터 창작물, 스팟 사진·기본정보는 기존 출처(TourAPI 등) 표기 승계. 타인 코스 복제·여행사 일정표 전재는 금지(검수+신고).
+- **가격 상한**: 등록가 0~1,000,000원(정책 조정 가능)로 비정상 가격 차단.
+
+### 7.7 법적 검토 (출시 전 필수)
+
+- **통신판매중개업**: 플랫폼이 크리에이터-구매자 거래를 중개하므로 **통신판매업 신고** + 거래 화면·약관에 **통신판매중개자**임과 "중개자는 거래 당사자가 아니다"라는 책임 범위 고지(전자상거래법 §20). 크리에이터 정보(판매자) 고지 의무 확인.
+- **청약철회(환불)**: 디지털콘텐츠는 **열람·다운로드(잠금 해제) 시작 시 청약철회가 제한**될 수 있으나(전자상거래법 §17②⑤), 이를 **결제 전 명확히 고지하고 동의받아야** 제한 효력 발생. 미고지 시 7일 내 철회 가능. → 구매 전 "구매 즉시 전체 공개되며 청약철회가 제한됩니다" 동의 UI + 부분 환불/분쟁 정책 수립. (모델은 `status=REFUNDED` 전이로 대응)
+- **정산·세무**: 크리에이터 **사업자/비사업자 구분**. 비사업자 개인 지급 시 **기타소득 원천징수(3.3%)**·지급명세서 제출, 사업자는 세금계산서. PG 정산 주기·미정산 보증, 부가세 처리 회계 설계 필요.
+- **개인정보**: 크리에이터 정산을 위한 계좌·주민번호(원천징수) 수집은 **별도 동의·암호화·목적 외 이용 금지**, 보관기간 분리.
+
+### 7.8 구현 현황 / 잔여
+
+- **완료(백엔드)**: 스키마·마이그레이션(`20260613150000_marketplace`), 작성/검수 API(`creator/`), 마켓·이용권·구매·정산(`marketplace/`), 페이월(상세·여행 시작 게이트), 결제 어댑터 게이팅, **통합 테스트 20개**(총 79개 통과).
+- **잔여**: ① **모바일 마켓플레이스 UI**(탐색·상세 잠금/구매·내 코스 작성기·내 구매함) ② **PG 실연동**(포트원/토스 + 웹훅 서명) ③ **법무**(통신판매업·청약철회 UI·정산/세무) ④ 크리에이터 정산 대시보드(관리자) ⑤ 코스 작성기 UX(스팟 검색·일자 편집).

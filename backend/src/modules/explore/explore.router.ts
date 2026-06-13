@@ -8,6 +8,7 @@ import { cached } from '../../lib/cache.js'
 import { parseId, parsePage } from '../../lib/util.js'
 import { nearbySpots } from '../../lib/geo.js'
 import { todayOpenStatus } from '../../lib/openHours.js'
+import { courseEntitlement } from '../marketplace/entitlement.js'
 
 export const exploreRouter = Router()
 
@@ -118,6 +119,31 @@ exploreRouter.get(
   }),
 )
 
+// 스팟 목록(지역 필터·이름 검색) — 코스 작성기의 스팟 선택용
+exploreRouter.get(
+  '/spots',
+  h(async (req, res) => {
+    const { cursor, limit } = parsePage(req.query as Record<string, unknown>)
+    const regionId = typeof req.query.regionId === 'string' && /^\d+$/.test(req.query.regionId) ? BigInt(req.query.regionId) : undefined
+    const q = typeof req.query.q === 'string' ? req.query.q.trim() : ''
+    const spots = await prisma.spot.findMany({
+      where: {
+        status: 'ACTIVE',
+        ...(regionId ? { regionId } : {}),
+        ...(q ? { name: { contains: q, mode: 'insensitive' } } : {}),
+        ...(cursor ? { id: { lt: cursor } } : {}),
+      },
+      orderBy: { id: 'desc' },
+      take: limit,
+      select: { id: true, name: true, category: true, lat: true, lng: true, images: { take: 1, orderBy: { sortOrder: 'asc' }, select: { url: true } } },
+    })
+    ok(res, {
+      items: spots.map((s) => ({ id: s.id, name: s.name, category: s.category, lat: s.lat, lng: s.lng, thumbnail: s.images[0]?.url ?? null })),
+      nextCursor: spots.length === limit ? (spots[spots.length - 1]?.id.toString() ?? null) : null,
+    })
+  }),
+)
+
 exploreRouter.get(
   '/courses',
   h(async (req, res) => {
@@ -176,6 +202,7 @@ exploreRouter.get(
       where: { id, status: 'PUBLISHED' },
       include: {
         region: { select: { id: true, name: true } },
+        author: { select: { id: true, nickname: true } },
         themes: { include: { theme: { select: { id: true, name: true } } } },
         items: {
           orderBy: [{ dayNo: 'asc' }, { sortOrder: 'asc' }],
@@ -189,14 +216,15 @@ exploreRouter.get(
 
     prisma.course.update({ where: { id }, data: { viewCount: { increment: 1 } } }).catch(() => {})
 
-    const [agg, bookmark] = await Promise.all([
+    const [agg, bookmark, entitlement] = await Promise.all([
       prisma.review.aggregate({ where: { targetType: 'COURSE', targetId: id, status: 'VISIBLE' }, _avg: { rating: true }, _count: true }),
       req.userId
         ? prisma.bookmark.findUnique({ where: { userId_targetType_targetId: { userId: req.userId, targetType: 'COURSE', targetId: id } } })
         : null,
+      courseEntitlement(course, req.userId ?? null),
     ])
 
-    const days = [...new Set(course.items.map((i) => i.dayNo))].map((dayNo) => ({
+    const allDays = [...new Set(course.items.map((i) => i.dayNo))].sort((a, b) => a - b).map((dayNo) => ({
       dayNo,
       items: course.items
         .filter((i) => i.dayNo === dayNo)
@@ -219,17 +247,33 @@ exploreRouter.get(
         })),
     }))
 
+    // 유료 코스 미구매 시: 1일차만 미리보기로 노출하고 상세(좌표·메모·이후 일자)는 잠금
+    const locked = !entitlement.entitled
+    const days = locked
+      ? allDays.slice(0, 1).map((d) => ({
+          dayNo: d.dayNo,
+          items: d.items.map((it) => ({
+            spot: { id: it.spot.id, name: it.spot.name, category: it.spot.category, thumbnail: it.spot.thumbnail },
+          })),
+        }))
+      : allDays
+
     ok(res, {
       id: course.id,
       title: course.title,
       summary: course.summary,
       cover: course.coverImageUrl,
       region: course.region,
+      authorType: course.authorType,
+      author: course.author ? { id: course.author.id, nickname: course.author.nickname } : null,
+      price: course.price,
       durationDays: course.durationDays,
       estCost: course.estCost,
       themes: course.themes.map((t) => t.theme),
       spotCount: course.items.length,
       saveCount: course.saveCount,
+      locked,
+      entitlementReason: entitlement.reason,
       days,
       reviewSummary: { avg: agg._avg.rating ? Number(agg._avg.rating.toFixed(1)) : null, count: agg._count },
       isBookmarked: req.userId ? Boolean(bookmark) : null,

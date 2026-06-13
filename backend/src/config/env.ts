@@ -23,6 +23,12 @@ const schema = z.object({
   S3_PUBLIC_BASE_URL: z.string().optional().or(z.literal('')), // CloudFront 도메인. 비우면 S3 URL 사용
   // FCM 푸시 (비우면 실제 발송 없이 수신자 집계만)
   FCM_PROJECT_ID: z.string().optional().or(z.literal('')),
+  // 마켓플레이스 결제 PG (비우면 유료 코스 구매 503, 무료 코스는 정상)
+  PG_PROVIDER: z.string().optional().or(z.literal('')), // mock(개발) | portone
+  PG_API_SECRET: z.string().optional().or(z.literal('')),
+  PORTONE_WEBHOOK_SECRET: z.string().optional().or(z.literal('')), // PortOne 웹훅 서명 검증용
+  // 플랫폼 수수료율(%) — 정산 시 크리에이터 몫 = 가격 × (1 - 수수료율)
+  MARKETPLACE_FEE_PERCENT: z.coerce.number().min(0).max(100).default(20),
 })
 
 export const env = schema.parse(process.env)

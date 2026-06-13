@@ -8,6 +8,7 @@ import { validateBody } from '../../middleware/validate.js'
 import { requireUser } from '../../middleware/auth.js'
 import { nextCursorOf, parseId, parsePage } from '../../lib/util.js'
 import { distanceToSpotMeters, resolveCheckinRadius, writeCheckinLocation } from '../../lib/geo.js'
+import { courseEntitlement } from '../marketplace/entitlement.js'
 
 export const tripsRouter = Router()
 
@@ -95,6 +96,10 @@ tripsRouter.post(
     })
     if (!course) throw Errors.notFound('코스')
     if (course.items.length === 0) throw Errors.conflict('COURSE_EMPTY', '구성 스팟이 없는 코스입니다')
+
+    // 유료 코스는 구매(이용권) 후에만 여행 시작 가능 — 페이월 우회 방지
+    const ent = await courseEntitlement(course, req.userId!)
+    if (!ent.entitled) throw Errors.forbidden('구매 후 이용할 수 있는 유료 코스입니다')
 
     const start = new Date(`${startDate}T00:00:00Z`)
     const end = new Date(start)
