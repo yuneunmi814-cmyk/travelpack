@@ -17,6 +17,9 @@ export function HomeScreen({ navigation }: Props) {
   function openRegion(r: Region) {
     navigation.navigate('ExploreTab', { screen: 'CourseList', params: { regionId: r.id, regionName: r.name } })
   }
+  function openMarketplace() {
+    navigation.navigate('ExploreTab', { screen: 'Marketplace' })
+  }
 
   if (loading) return <Loading />
   if (error || !data) return <EmptyState text={error ?? '불러오기 실패'} />
@@ -33,6 +36,18 @@ export function HomeScreen({ navigation }: Props) {
           </View>
         </Card>
       )}
+
+      <Pressable onPress={openMarketplace}>
+        <Card style={{ backgroundColor: colors.primaryWeak, borderColor: colors.primaryWeak }}>
+          <View style={{ padding: space(5), flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+            <View style={{ flex: 1 }}>
+              <Text style={{ color: colors.primaryDeep, fontWeight: '800', fontSize: 15 }}>🧳 크리에이터 마켓플레이스</Text>
+              <Text style={{ color: colors.primaryDeep, fontSize: 12, marginTop: 4 }}>여행 고수의 코스를 사고, 내 코스를 팔아보세요</Text>
+            </View>
+            <Text style={{ color: colors.primaryDeep, fontSize: 22, fontWeight: '700' }}>›</Text>
+          </View>
+        </Card>
+      </Pressable>
 
       <Section title="이번 주 추천 코스">
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space(3) }}>

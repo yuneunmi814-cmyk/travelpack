@@ -16,6 +16,10 @@ import { MyScreen } from '../screens/MyScreen'
 import { LoginScreen } from '../screens/LoginScreen'
 import { ConsentScreen } from '../screens/ConsentScreen'
 import { InterestsScreen } from '../screens/InterestsScreen'
+import { MarketplaceScreen } from '../screens/MarketplaceScreen'
+import { MyCoursesScreen } from '../screens/MyCoursesScreen'
+import { CourseEditorScreen } from '../screens/CourseEditorScreen'
+import { MyPurchasesScreen } from '../screens/MyPurchasesScreen'
 
 const Tab = createBottomTabNavigator<TabParams>()
 const ExploreStack = createNativeStackNavigator<ExploreStackParams>()
@@ -30,6 +34,7 @@ function ExploreNavigator() {
       <ExploreStack.Screen name="CourseDetail" component={CourseDetailScreen} options={{ title: '코스 상세' }} />
       <ExploreStack.Screen name="SpotDetail" component={SpotDetailScreen} options={{ title: '관광지' }} />
       <ExploreStack.Screen name="ReviewWrite" component={ReviewWriteScreen} options={{ title: '리뷰 작성' }} />
+      <ExploreStack.Screen name="Marketplace" component={MarketplaceScreen} options={{ title: '크리에이터 마켓' }} />
     </ExploreStack.Navigator>
   )
 }
@@ -50,6 +55,9 @@ function MyNavigator() {
       <MyStack.Screen name="Login" component={LoginScreen} options={{ title: '로그인', presentation: 'modal' }} />
       <MyStack.Screen name="Consent" component={ConsentScreen} options={{ title: '약관 동의' }} />
       <MyStack.Screen name="Interests" component={InterestsScreen} options={{ title: '관심 테마' }} />
+      <MyStack.Screen name="MyCourses" component={MyCoursesScreen} options={{ title: '내 여행팩' }} />
+      <MyStack.Screen name="CourseEditor" component={CourseEditorScreen} options={{ title: '여행팩 만들기' }} />
+      <MyStack.Screen name="MyPurchases" component={MyPurchasesScreen} options={{ title: '구매한 여행팩' }} />
     </MyStack.Navigator>
   )
 }

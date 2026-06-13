@@ -31,11 +31,15 @@ export interface SpotSummary {
   id: string
   name: string
   category: string
-  summary: string | null
-  lat: number
-  lng: number
+  summary?: string | null
+  lat?: number       // 유료 코스 잠금 미리보기에서는 비어 있음
+  lng?: number
   thumbnail: string | null
 }
+
+export type ContentStatus = 'DRAFT' | 'IN_REVIEW' | 'PUBLISHED' | 'ARCHIVED'
+export type EntitlementReason = 'FREE' | 'AUTHOR' | 'PURCHASED' | 'LOCKED'
+export type CourseAuthorType = 'EDITOR' | 'USER'
 
 export interface CourseItem {
   id: string
@@ -55,15 +59,74 @@ export interface CourseDetail {
   summary: string | null
   cover: string | null
   region: { id: string; name: string }
+  authorType: CourseAuthorType
+  author: { id: string; nickname: string } | null
+  price: number
   durationDays: number
   estCost: number | null
   themes: { id: string; name: string }[]
   spotCount: number
   saveCount: number
+  locked: boolean
+  entitlementReason: EntitlementReason
   days: CourseDay[]
   reviewSummary: { avg: number | null; count: number }
   isBookmarked: boolean | null
 }
+
+// 마켓플레이스 카드(사용자 작성 코스)
+export interface MarketCard {
+  id: string
+  title: string
+  summary: string | null
+  cover: string | null
+  region: string
+  durationDays: number
+  spotCount: number
+  price: number
+  salesCount: number
+  saveCount: number
+  themes: string[]
+  author: { id: string; nickname: string } | null
+}
+
+// 내 코스(크리에이터) 목록 항목
+export interface MyCourse {
+  id: string
+  title: string
+  cover: string | null
+  region: string
+  status: ContentStatus
+  durationDays: number
+  spotCount: number
+  price: number
+  salesCount: number
+  publishedAt: string | null
+}
+
+// 내 코스 상세(에디터 프리필용)
+export interface MyCourseDetail {
+  id: string
+  title: string
+  summary: string | null
+  cover: string | null
+  region: { id: string; name: string }
+  durationDays: number
+  estCost: number | null
+  price: number
+  status: ContentStatus
+  salesCount: number
+  publishedAt: string | null
+  themes: { id: string; name: string }[]
+  spotCount: number
+  days: CourseDay[]
+  editable: boolean
+}
+
+export interface Purchase { purchaseId: string; price: number; purchasedAt: string | null; course: MarketCard }
+
+// 스팟 선택기용 경량 항목
+export interface SpotPick { id: string; name: string; category: string; lat: number; lng: number; thumbnail: string | null }
 
 export interface AudioGuide {
   id: string

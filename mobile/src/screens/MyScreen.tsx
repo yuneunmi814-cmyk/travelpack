@@ -1,4 +1,4 @@
-import { ScrollView, Text, View, StyleSheet } from 'react-native'
+import { Pressable, ScrollView, Text, View, StyleSheet } from 'react-native'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useAuth } from '../auth/AuthContext'
 import { Button, Card } from '../components/ui'
@@ -6,6 +6,15 @@ import { colors, space } from '../theme'
 import type { MyStackParams } from '../navigation/types'
 
 type Props = NativeStackScreenProps<MyStackParams, 'MyPage'>
+
+function Row({ label, onPress }: { label: string; onPress: () => void }) {
+  return (
+    <Pressable onPress={onPress} style={({ pressed }) => [styles.row, pressed && { backgroundColor: colors.bg2 }]}>
+      <Text style={{ color: colors.text, fontSize: 15 }}>{label}</Text>
+      <Text style={{ color: colors.textHint, fontSize: 18 }}>›</Text>
+    </Pressable>
+  )
+}
 
 export function MyScreen({ navigation }: Props) {
   const { user, isAuthed, logout } = useAuth()
@@ -21,7 +30,13 @@ export function MyScreen({ navigation }: Props) {
               <Text style={{ color: colors.textSub, fontSize: 12, marginTop: 4 }}>관심: {user.interests.map((i) => i.name).join(', ')}</Text>
             )}
           </Card>
-          <Button title="관심 테마 설정" kind="ghost" onPress={() => navigation.navigate('Interests')} />
+          <Card style={{ padding: 0, overflow: 'hidden' }}>
+            <Row label="🧳 내 여행팩 (만들기·판매)" onPress={() => navigation.navigate('MyCourses')} />
+            <View style={styles.div} />
+            <Row label="🛒 구매한 여행팩" onPress={() => navigation.navigate('MyPurchases')} />
+            <View style={styles.div} />
+            <Row label="⭐ 관심 테마 설정" onPress={() => navigation.navigate('Interests')} />
+          </Card>
           <Button title="로그아웃" kind="ghost" onPress={logout} />
         </>
       ) : (
@@ -38,4 +53,6 @@ export function MyScreen({ navigation }: Props) {
 
 const styles = StyleSheet.create({
   ver: { textAlign: 'center', color: colors.textHint, fontSize: 12, marginTop: space(4) },
+  row: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: space(4), paddingVertical: space(4) },
+  div: { height: 1, backgroundColor: colors.line, marginLeft: space(4) },
 })

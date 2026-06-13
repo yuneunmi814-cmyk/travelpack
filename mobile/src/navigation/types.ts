@@ -6,6 +6,7 @@ export type ExploreStackParams = {
   CourseDetail: { courseId: string }
   SpotDetail: { spotId: string }
   ReviewWrite: { targetType: 'COURSE' | 'SPOT'; targetId: string; targetName: string }
+  Marketplace: undefined
 }
 
 export type TripsStackParams = {
@@ -18,6 +19,9 @@ export type MyStackParams = {
   Login: undefined
   Consent: { email: string; password: string; nickname: string }
   Interests: undefined
+  MyCourses: undefined
+  CourseEditor: { courseId?: string }
+  MyPurchases: undefined
 }
 
 export type TabParams = {

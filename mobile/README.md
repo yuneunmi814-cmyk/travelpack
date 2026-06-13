@@ -31,7 +31,7 @@ npx expo export -p android -o /tmp/x    # Metro 번들 생성 확인
 - `src/api/` — `client.ts`(토큰 저장·refresh), `types.ts`(공개 API 타입), `useResource.ts`
 - `src/auth/AuthContext.tsx` — 로그인/가입/세션, 게스트 열람 허용(결정 4)
 - `src/navigation/` — 하단탭 5개(홈·탐색·내 여행·저장·MY) + 스택
-- `src/screens/` — Home·Regions·CourseList·CourseDetail·SpotDetail·ReviewWrite·Trips·GuideMode·Saved·My·Login·Consent·Onboarding
+- `src/screens/` — Home·Regions·CourseList·CourseDetail·SpotDetail·ReviewWrite·Trips·GuideMode·Saved·My·Login·Consent·Onboarding·**Marketplace·MyCourses·CourseEditor·MyPurchases**(마켓플레이스)
 - `src/components/MapView.tsx`(카카오맵 추상화)·`BookmarkButton.tsx`, `src/auth/social.ts`(카카오 로그인)
 
 ## 핵심 흐름
@@ -51,8 +51,10 @@ npx expo export -p android -o /tmp/x    # Metro 번들 생성 확인
 - **리뷰 작성**(별점·1,000자) + **북마크 토글**(코스/관광지 상세, 저장함 연동)
 - **관심 테마(ON-02)**(가입 직후/마이페이지), **구글 로그인**(expo-auth-session, `EXPO_PUBLIC_GOOGLE_CLIENT_ID` 게이트), **FCM 토큰 등록**(expo-notifications, 로그인 시)
 - **관광사진 갤러리**(관광지 상세), **오디오 가이드**(expo-audio), 홈 **인기 지역 배지**
+- **크리에이터 마켓플레이스**(설계서 7장): 마켓 탐색(`MarketplaceScreen`, 홈·탐색 진입), 코스 상세 **페이월**(잠금 1일차 미리보기 + 구매 CTA·청약철회 고지), **코스 작성기**(`CourseEditorScreen` — 지역·기간·가격·테마·일자별 스팟 선택, 임시저장/검수요청/회수/삭제), **내 여행팩**(`MyCoursesScreen`)·**구매함**(`MyPurchasesScreen`). MY 탭에서 진입
 
 ## 남은 작업
 
 - 카카오맵 **커스텀 번호 마커·경로선**: `@react-native-kakao/map` 2.x 미지원 → 현재 내장 POI 라벨(poiEnabled)만. 완전 구현은 **Kakao JS Maps SDK(WebView + JS키)** 필요
 - 모바일 영문 토글 UI(백엔드 `?lang=en` 준비됨), 통합 검색 화면
+- 마켓플레이스 **결제 실연동**(PG): 현재 무료 코스는 즉시 구매, 유료는 백엔드 PG 어댑터 연동 시 동작
