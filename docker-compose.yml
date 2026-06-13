@@ -1,0 +1,63 @@
+# TravelPack 체험용 풀스택 (DB + Redis + 백엔드 API)
+#
+#   docker compose up -d --build          # 전체 기동 (API → http://localhost:4000)
+#   docker compose run --rm seed          # 제주 시드 (관리자 3계정 + 코스 2개 + 스팟 8곳)
+#   docker compose logs -f backend        # 로그
+#   docker compose down                   # 정지 (down -v 로 데이터까지 삭제)
+#
+# 데모 모드라 NODE_ENV=development + PG_PROVIDER=mock → 유료 코스 구매도 즉시 승인됩니다.
+# TourAPI 동기화를 쓰려면 TOURAPI_SERVICE_KEY를 환경에 주입하세요.
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_USER: travelpack
+      POSTGRES_PASSWORD: travelpack
+      POSTGRES_DB: travelpack_dev
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U travelpack -d travelpack_dev"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  backend:
+    build: ./backend
+    environment:
+      NODE_ENV: development # 데모: mock 결제 활성화에 필요(운영은 production)
+      DATABASE_URL: postgresql://travelpack:travelpack@db:5432/travelpack_dev
+      REDIS_URL: redis://redis:6379
+      PG_PROVIDER: mock # 데모용 즉시 승인 결제
+      MARKETPLACE_FEE_PERCENT: "20"
+      TOURAPI_SERVICE_KEY: ${TOURAPI_SERVICE_KEY:-}
+      SEED_ADMIN_PASSWORD: ${SEED_ADMIN_PASSWORD:-travelpack-dev-1234}
+    ports:
+      - "4000:4000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+  # 일회성 시드 (docker compose run --rm seed). 재실행 시 데이터가 초기화됩니다.
+  seed:
+    build: ./backend
+    profiles: ["seed"]
+    command: npm run db:seed
+    environment:
+      DATABASE_URL: postgresql://travelpack:travelpack@db:5432/travelpack_dev
+      SEED_ADMIN_PASSWORD: ${SEED_ADMIN_PASSWORD:-travelpack-dev-1234}
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
