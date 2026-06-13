@@ -228,6 +228,17 @@ describe('이용권·구매 (페이월)', () => {
       expect(res.status).toBe(201)
     })
 
+    it('관리자 정산 대시보드에 크리에이터 매출·지급액 집계', async () => {
+      const opsToken = await adminToken(seed.admins.super, 'OPERATION_MANAGER')
+      const res = await api.get('/api/v1/admin/marketplace/settlements').set('Authorization', `Bearer ${opsToken}`)
+      expect(res.status).toBe(200)
+      expect(res.body.data.summary.grossRevenue).toBeGreaterThanOrEqual(12000)
+      expect(res.body.data.summary.feePercent).toBe(20)
+      const creator = res.body.data.creators.find((c: { gross: number }) => c.gross >= 12000)
+      expect(creator).toBeTruthy()
+      expect(creator.payout).toBe(creator.gross - creator.platformFee)
+    })
+
     it('구매 실패(PG 거절)는 409 PAYMENT_FAILED, 이용권 미부여', async () => {
       setPaymentTransportForTest(async () => ({ ok: false, paymentId: '', provider: 'mock', failureReason: 'CARD_DECLINED' }))
       const newBuyer = (await signupUser()).accessToken

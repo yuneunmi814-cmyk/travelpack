@@ -11,6 +11,7 @@ import { UsersPage } from './pages/UsersPage'
 import { ReportsPage } from './pages/ReportsPage'
 import { BannersPage } from './pages/BannersPage'
 import { PushPage } from './pages/PushPage'
+import { SettlementsPage } from './pages/SettlementsPage'
 
 export function App() {
   const { isAuthed } = useAuth()
@@ -36,6 +37,7 @@ export function App() {
         <Route path="/reports" element={<ReportsPage />} />
         <Route path="/banners" element={<BannersPage />} />
         <Route path="/push" element={<PushPage />} />
+        <Route path="/settlements" element={<SettlementsPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>

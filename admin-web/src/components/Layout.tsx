@@ -13,6 +13,7 @@ const NAV: NavDef[] = [
   { to: '/reports', label: '신고', roles: ['SUPER_ADMIN', 'OPERATION_MANAGER'] },
   { to: '/banners', label: '배너', roles: ['SUPER_ADMIN', 'MARKETER'] },
   { to: '/push', label: '푸시', roles: ['SUPER_ADMIN', 'MARKETER'] },
+  { to: '/settlements', label: '정산', roles: ['SUPER_ADMIN', 'OPERATION_MANAGER'] },
 ]
 
 const ROLE_LABEL: Record<AdminRole, string> = {
@@ -25,7 +26,7 @@ const ROLE_LABEL: Record<AdminRole, string> = {
 
 const TITLES: Record<string, string> = {
   '/': '대시보드', '/spots': '관광지 관리', '/courses': '코스 관리',
-  '/users': '회원 관리', '/reports': '신고 관리', '/banners': '배너 관리', '/push': '푸시 캠페인',
+  '/users': '회원 관리', '/reports': '신고 관리', '/banners': '배너 관리', '/push': '푸시 캠페인', '/settlements': '마켓 정산',
 }
 
 export function Layout() {

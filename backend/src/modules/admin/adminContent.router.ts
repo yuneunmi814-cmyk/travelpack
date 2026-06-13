@@ -8,6 +8,7 @@ import { validateBody } from '../../middleware/validate.js'
 import { requireAdmin } from '../../middleware/auth.js'
 import { nextCursorOf, parseId, parsePage } from '../../lib/util.js'
 import { invalidateExploreCache } from '../../lib/cache.js'
+import { settlement } from '../marketplace/payment.js'
 import { logAudit } from './audit.js'
 
 export const adminContentRouter = Router()
@@ -357,5 +358,53 @@ adminContentRouter.post(
   h(async (req, res) => {
     const updated = await transition(req, parseId(req.params.id), ['PUBLISHED'], 'ARCHIVED', 'COURSE_UNPUBLISH')
     ok(res, { courseId: updated.id, status: updated.status })
+  }),
+)
+
+// ── 마켓플레이스 정산 대시보드 ──────────────────────────────
+// 크리에이터별 판매·정산(수수료 차감 후 지급액) 집계. 결제 완료(PAID) 구매 기준.
+adminContentRouter.get(
+  '/marketplace/settlements',
+  requireAdmin('OPERATION_MANAGER'),
+  h(async (_req, res) => {
+    const purchases = await prisma.coursePurchase.findMany({
+      where: { status: 'PAID' },
+      select: {
+        price: true,
+        purchasedAt: true,
+        course: { select: { authorUserId: true, author: { select: { nickname: true } } } },
+      },
+    })
+
+    const byCreator = new Map<string, { authorId: string; nickname: string; salesCount: number; gross: number }>()
+    let gross = 0
+    for (const p of purchases) {
+      gross += p.price
+      const authorId = p.course.authorUserId?.toString()
+      if (!authorId) continue // 에디터(공식) 유료 코스 등 — 작성자 없음
+      const cur = byCreator.get(authorId) ?? { authorId, nickname: p.course.author?.nickname ?? '(탈퇴)', salesCount: 0, gross: 0 }
+      cur.salesCount += 1
+      cur.gross += p.price
+      byCreator.set(authorId, cur)
+    }
+
+    const creators = [...byCreator.values()]
+      .map((c) => {
+        const s = settlement(c.gross)
+        return { ...c, platformFee: s.platformFee, payout: s.creatorPayout }
+      })
+      .sort((a, b) => b.gross - a.gross)
+
+    const total = settlement(gross)
+    ok(res, {
+      summary: {
+        paidCount: purchases.length,
+        grossRevenue: gross,
+        platformFee: total.platformFee,
+        creatorPayout: total.creatorPayout,
+        feePercent: total.feePercent,
+      },
+      creators,
+    })
   }),
 )
