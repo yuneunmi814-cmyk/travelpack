@@ -1,5 +1,12 @@
+import { readFileSync } from 'node:fs'
 import type { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
+
+// 전국 지역 대표 관광지(한국관광공사 TourAPI) — npm run db:seed 시 옵션으로 적재
+interface RegionSpot { name: string; category: string; lat: number; lng: number; image: string }
+const REGION_SEED: { jejuExtraImages: Record<string, string | null>; regions: Record<string, RegionSpot[]> } =
+  JSON.parse(readFileSync(new URL('./seed-regions.json', import.meta.url), 'utf8'))
+const REGION_KO: Record<string, string> = { busan: '부산', gyeongju: '경주', yeosu: '여수', gangneung: '강릉', jeonju: '전주' }
 
 export interface SeedResult {
   regionId: bigint
@@ -29,8 +36,10 @@ const SPOT_IMAGES: Record<string, string> = {
   '월정리 해변': 'https://tong.visitkorea.or.kr/cms/resource/36/3011836_image2_1.jpg',
   '동문재래시장': 'https://tong.visitkorea.or.kr/cms/resource/38/2678438_image2_1.jpg',
 }
+// 추가로 확보된 제주 대표사진(섭지코지·비자림·만장굴 등)이 있으면 병합
+for (const [k, v] of Object.entries(REGION_SEED.jejuExtraImages)) if (v) SPOT_IMAGES[k] = v
 
-export async function runSeed(prisma: PrismaClient, adminPassword: string, rounds = 10): Promise<SeedResult> {
+export async function runSeed(prisma: PrismaClient, adminPassword: string, rounds = 10, opts: { regions?: boolean } = {}): Promise<SeedResult> {
   // 의존 역순 전체 삭제 (개발·테스트 시드 전용)
   await prisma.$transaction([
     prisma.auditLog.deleteMany(),
@@ -165,6 +174,37 @@ export async function runSeed(prisma: PrismaClient, adminPassword: string, round
       sortOrder: 1,
     },
   })
+
+  // 전국 지역 대표 관광지 + 지역별 핵심 코스 (db:seed 옵션). 테스트 시드(runSeed 기본)에는 미포함
+  if (opts.regions) {
+    const rows = await prisma.region.findMany({ where: { slug: { in: Object.keys(REGION_SEED.regions) } } })
+    const bySlug = new Map(rows.map((r) => [r.slug, r.id]))
+    for (const [slug, spots] of Object.entries(REGION_SEED.regions)) {
+      const regionId = bySlug.get(slug)
+      if (!regionId || spots.length === 0) continue
+      const ko = REGION_KO[slug] ?? slug
+      const ids: bigint[] = []
+      for (const s of spots) {
+        const sp = await prisma.spot.create({
+          data: {
+            regionId, name: s.name, category: s.category, lat: s.lat, lng: s.lng,
+            summary: `${ko} 대표 관광지`, address: `${ko} 일대`, avgStayMinutes: 60,
+            images: { create: [{ url: s.image, sourceCredit: '한국관광공사', source: 'TOURAPI', sourceId: 'seed', sortOrder: 0 }] },
+          },
+        })
+        ids.push(sp.id)
+      }
+      await prisma.course.create({
+        data: {
+          regionId, title: `${ko} 핵심 코스`, summary: `${ko} 대표 명소를 하루에 둘러보는 코스`,
+          coverImageUrl: spots[0]!.image, durationDays: 1, estCost: 50000,
+          status: 'PUBLISHED', publishedAt: new Date(), createdBy: editor.id, saveCount: 300,
+          themes: { create: [{ themeId: themes['자연']! }] },
+          items: { create: ids.map((spotId, i) => ({ dayNo: 1, sortOrder: i + 1, spotId, stayMinutes: 60 })) },
+        },
+      })
+    }
+  }
 
   return {
     regionId: jeju.id,
