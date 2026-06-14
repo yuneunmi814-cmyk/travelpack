@@ -177,6 +177,23 @@ export async function runSeed(prisma: PrismaClient, adminPassword: string, round
 
   // 전국 지역 대표 관광지 + 지역별 핵심 코스 (db:seed 옵션). 테스트 시드(runSeed 기본)에는 미포함
   if (opts.regions) {
+    // 스토어 심사용 데모 계정 (게스트 열람 외 로그인 기능 테스트용)
+    await prisma.user.create({
+      data: {
+        email: 'demo@travelpack.app',
+        passwordHash: await bcrypt.hash('travelpack-demo-1234', rounds),
+        nickname: '데모여행자',
+        provider: 'local',
+        consents: {
+          create: [
+            { consentType: 'TERMS', agreed: true, version: '1.0' },
+            { consentType: 'PRIVACY', agreed: true, version: '1.0' },
+            { consentType: 'AGE14', agreed: true, version: '1.0' },
+          ],
+        },
+      },
+    })
+
     const rows = await prisma.region.findMany({ where: { slug: { in: Object.keys(REGION_SEED.regions) } } })
     const bySlug = new Map(rows.map((r) => [r.slug, r.id]))
     for (const [slug, spots] of Object.entries(REGION_SEED.regions)) {

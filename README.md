@@ -46,6 +46,7 @@
 | [`mobile/`](mobile/) | 안드로이드 앱 — React Native(Expo) + TS |
 | [`docs/DEPLOY.md`](docs/DEPLOY.md) · [`render.yaml`](render.yaml) | 체험용 Docker 실행 + 클라우드 배포(Render 블루프린트: API·PostGIS·Redis·CMS) |
 | [`docs/launch-checklist.md`](docs/launch-checklist.md) | **출시 체크리스트** — 배포·양대 스토어(Google Play/App Store)·법무 최종 정리 |
+| [`docs/store-submission.md`](docs/store-submission.md) | **스토어 제출 자료(복붙용)** — 설명문구·데이터안전/개인정보·연령등급·심사정보·스크린샷 캡션 |
 | [`docs/legal/`](docs/legal/) | 법무 문서 초안 — 이용약관·개인정보처리방침·위치약관·청약철회정책 (변호사 검토 전) |
 
 ---
