@@ -63,6 +63,9 @@ export interface CourseListItem {
   durationDays: number
   spotCount: number
   createdBy: string
+  authorType?: 'EDITOR' | 'USER'
+  price?: number
+  salesCount?: number
   publishedAt: string | null
   saveCount: number
 }

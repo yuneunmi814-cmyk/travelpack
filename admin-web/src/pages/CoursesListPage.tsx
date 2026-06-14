@@ -45,7 +45,7 @@ export function CoursesListPage() {
             : (
               <table className="tbl">
                 <thead>
-                  <tr><th>제목</th><th>지역</th><th>상태</th><th className="num">일수</th><th className="num">스팟</th><th>작성자</th><th className="num">저장</th></tr>
+                  <tr><th>제목</th><th>지역</th><th>상태</th><th>유형</th><th className="num">일수</th><th className="num">스팟</th><th>작성자</th><th className="num">가격</th><th className="num">저장</th></tr>
                 </thead>
                 <tbody>
                   {data.items.map((c) => (
@@ -53,9 +53,11 @@ export function CoursesListPage() {
                       <td style={{ fontWeight: 500 }}>{c.title}</td>
                       <td className="muted">{c.region}</td>
                       <td><CourseStatusBadge status={c.status as ContentStatus} /></td>
+                      <td><span className={`badge ${c.authorType === 'USER' ? 'warn' : ''}`}>{c.authorType === 'USER' ? '크리에이터' : '에디터'}</span></td>
                       <td className="num">{c.durationDays}일</td>
                       <td className="num">{c.spotCount}</td>
                       <td className="muted">{c.createdBy}</td>
+                      <td className="num">{!c.price ? '무료' : `${c.price.toLocaleString()}원${c.salesCount ? ` · ${c.salesCount}판매` : ''}`}</td>
                       <td className="num">{c.saveCount.toLocaleString()}</td>
                     </tr>
                   ))}

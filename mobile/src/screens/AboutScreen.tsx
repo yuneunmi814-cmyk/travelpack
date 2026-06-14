@@ -55,6 +55,7 @@ export function AboutScreen(_props: Props) {
         ))}
       </Card>
 
+      <Text style={styles.source}>관광 정보·사진 일부는 한국관광공사 TourAPI를 활용합니다.</Text>
       <Text style={styles.ver}>TravelPack v0.1.0</Text>
     </ScrollView>
   )
@@ -67,5 +68,6 @@ const styles = StyleSheet.create({
   v: { flex: 1, color: colors.text, fontSize: 13 },
   policy: { paddingHorizontal: space(4), paddingVertical: space(3), color: colors.text, fontSize: 14 },
   div: { height: 1, backgroundColor: colors.line, marginLeft: space(4) },
-  ver: { textAlign: 'center', color: colors.textHint, fontSize: 12, marginTop: space(2) },
+  source: { textAlign: 'center', color: colors.textHint, fontSize: 11, marginTop: space(3) },
+  ver: { textAlign: 'center', color: colors.textHint, fontSize: 12, marginTop: space(1) },
 })
