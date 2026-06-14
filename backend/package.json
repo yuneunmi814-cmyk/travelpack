@@ -15,6 +15,7 @@
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
     "db:seed": "tsx prisma/seed.ts",
+    "seed:prod": "tsx prisma/seed-prod.ts",
     "db:studio": "prisma studio",
     "sync:tourapi": "tsx scripts/sync-tourapi.ts",
     "sync:audioguide": "tsx scripts/sync-audioguide.ts",

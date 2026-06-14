@@ -17,7 +17,9 @@ services:
     maxmemoryPolicy: noeviction
     ipAllowList: [] # 내부(렌더 네트워크)에서만 접근
 
-  # 백엔드 API (backend/Dockerfile — 기동 시 prisma migrate deploy 자동)
+  # 백엔드 API (backend/Dockerfile — 기동 시 migrate deploy → DB 비어있으면 1회 시드 → start)
+  # 첫 배포 시 전국 지역·코스·관광지·심사용 데모계정이 자동 적재됨(이미 있으면 건너뜀).
+  # 재시드를 원치 않으면 env SEED_ON_START=false. 강한 관리자 비번은 SEED_ADMIN_PASSWORD로.
   - type: web
     name: travelpack-api
     runtime: docker
