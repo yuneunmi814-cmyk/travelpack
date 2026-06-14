@@ -1,11 +1,32 @@
 {
   "jejuExtraImages": {
-    "섭지코지": null,
-    "비자림": null,
-    "만장굴": null
+    "섭지코지": "https://tong.visitkorea.or.kr/cms/resource/83/2513483_image2_1.jpg",
+    "비자림": "https://tong.visitkorea.or.kr/cms/resource/22/3350622_image2_1.jpg",
+    "만장굴": "https://tong.visitkorea.or.kr/cms/resource/55/3354155_image2_1.jpg"
   },
   "regions": {
     "busan": [
+      {
+        "name": "해운대해수욕장",
+        "category": "해변",
+        "lat": 35.1590840227225,
+        "lng": 129.160278564827,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/34/3090534_image2_1.JPG"
+      },
+      {
+        "name": "감천문화마을",
+        "category": "문화",
+        "lat": 35.0974606978369,
+        "lng": 129.010596996534,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/91/3365491_image2_1.jpg"
+      },
+      {
+        "name": "태종대",
+        "category": "자연",
+        "lat": 35.05969491904282,
+        "lng": 129.07980569117214,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/83/3506383_image2_1.jpg"
+      },
       {
         "name": "광안리해수욕장",
         "category": "해변",
@@ -14,85 +35,71 @@
         "image": "https://tong.visitkorea.or.kr/cms/resource/45/3311245_image2_1.jpg"
       },
       {
-        "name": "송도해수욕장",
-        "category": "해변",
-        "lat": 35.0739256715,
-        "lng": 129.016458847,
-        "image": "https://tong.visitkorea.or.kr/cms/resource/86/2504686_image2_1.jpg"
-      },
-      {
-        "name": "가덕도 등대",
-        "category": "자연",
-        "lat": 35.0006471157,
-        "lng": 128.8295937487,
-        "image": "https://tong.visitkorea.or.kr/cms/resource/81/3342781_image2_1.jpg"
-      },
-      {
-        "name": "가톨릭 특성화 거리",
-        "category": "문화",
-        "lat": 35.2434553947,
-        "lng": 129.097038863,
-        "image": "https://tong.visitkorea.or.kr/cms/resource/44/3552344_image2_1.jpg"
-      },
-      {
-        "name": "감천사",
+        "name": "해동용궁사",
         "category": "사찰",
-        "lat": 35.1833036953,
-        "lng": 129.0912632411,
-        "image": "https://tong.visitkorea.or.kr/cms/resource/20/3476820_image2_1.jpg"
+        "lat": 35.1882428912293,
+        "lng": 129.223530192843,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/35/3499335_image2_1.jpg"
       }
     ],
     "gyeongju": [
+      {
+        "name": "불국사",
+        "category": "사찰",
+        "lat": 35.7923023161251,
+        "lng": 129.331725391321,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/70/3506170_image2_1.jpg"
+      },
+      {
+        "name": "석굴암",
+        "category": "사찰",
+        "lat": 35.78934072227894,
+        "lng": 129.35075165526612,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/69/3581269_image2_1.jpg"
+      },
+      {
+        "name": "첨성대",
+        "category": "역사",
+        "lat": 35.8343303426799,
+        "lng": 129.218534537847,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/81/3554381_image2_1.jpg"
+      },
+      {
+        "name": "대릉원",
+        "category": "역사",
+        "lat": 35.8382,
+        "lng": 129.2128,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/71/4056771_image2_1.jpg"
+      },
       {
         "name": "동궁과 월지",
         "category": "역사",
         "lat": 35.8352023996,
         "lng": 129.2283747104,
         "image": "https://tong.visitkorea.or.kr/cms/resource/62/2612562_image2_1.jpg"
-      },
-      {
-        "name": "감포항",
-        "category": "해변",
-        "lat": 35.8078329413,
-        "lng": 129.5040374805,
-        "image": "https://tong.visitkorea.or.kr/cms/resource/78/3537978_image2_1.jpg"
-      },
-      {
-        "name": "강동 워터파크",
-        "category": "관광지",
-        "lat": 35.8179335881,
-        "lng": 129.3056850979,
-        "image": "https://tong.visitkorea.or.kr/cms/resource/71/3326671_image2_1.jpg"
-      },
-      {
-        "name": "경애왕릉",
-        "category": "역사",
-        "lat": 35.7962425289,
-        "lng": 129.2083275749,
-        "image": "https://tong.visitkorea.or.kr/cms/resource/28/3575928_image2_1.jpg"
-      },
-      {
-        "name": "계림",
-        "category": "자연",
-        "lat": 35.8326469552,
-        "lng": 129.218997827,
-        "image": "https://tong.visitkorea.or.kr/cms/resource/29/3535529_image2_1.jpg"
       }
     ],
     "yeosu": [
       {
-        "name": "오동도 등대",
+        "name": "오동도",
         "category": "자연",
         "lat": 34.7444013572,
         "lng": 127.7678097276,
         "image": "https://tong.visitkorea.or.kr/cms/resource/34/3019934_image2_1.jpg"
       },
       {
-        "name": "이순신광장",
+        "name": "향일암",
+        "category": "사찰",
+        "lat": 34.59163334096751,
+        "lng": 127.80364451033967,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/93/3499893_image2_1.JPG"
+      },
+      {
+        "name": "여수 해상케이블카",
         "category": "관광지",
-        "lat": 34.7399013049,
-        "lng": 127.7357348686,
-        "image": "https://tong.visitkorea.or.kr/cms/resource/07/3351107_image2_1.jpg"
+        "lat": 34.7307968308,
+        "lng": 127.7393264527,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/64/3422964_image2_1.png"
       },
       {
         "name": "돌산공원",
@@ -102,55 +109,48 @@
         "image": "https://tong.visitkorea.or.kr/cms/resource/54/3534454_image2_1.jpg"
       },
       {
-        "name": "하멜등대",
-        "category": "자연",
-        "lat": 34.7368102045,
-        "lng": 127.7484366144,
-        "image": "https://tong.visitkorea.or.kr/cms/resource/40/3080240_image2_1.jpg"
-      },
-      {
-        "name": "거문도",
+        "name": "이순신광장",
         "category": "관광지",
-        "lat": 34.0274901869,
-        "lng": 127.308948058,
-        "image": "https://tong.visitkorea.or.kr/cms/resource/49/3027249_image2_1.jpg"
+        "lat": 34.7399013049,
+        "lng": 127.7357348686,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/07/3351107_image2_1.jpg"
       }
     ],
     "gangneung": [
       {
-        "name": "굴산사지",
+        "name": "경포대",
         "category": "자연",
-        "lat": 37.7072681694,
-        "lng": 128.8918046506,
-        "image": "https://tong.visitkorea.or.kr/cms/resource/22/3025022_image2_1.jpg"
+        "lat": 37.7955136762197,
+        "lng": 128.896483966593,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/52/3501452_image2_1.jpg"
       },
       {
-        "name": "복사꽃마을",
-        "category": "문화",
-        "lat": 37.8801348222,
-        "lng": 128.7773762919,
-        "image": "https://tong.visitkorea.or.kr/cms/resource/42/3383742_image2_1.JPG"
+        "name": "경포해변",
+        "category": "해변",
+        "lat": 37.80577602432606,
+        "lng": 128.90743823970874,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/17/2671417_image2_1.jpg"
       },
       {
-        "name": "오금집",
-        "category": "관광지",
-        "lat": 37.7563708685,
-        "lng": 128.8940418219,
-        "image": "https://tong.visitkorea.or.kr/cms/resource/31/3378331_image2_1.JPG"
+        "name": "정동진",
+        "category": "해변",
+        "lat": 37.691360328107315,
+        "lng": 129.0325745067553,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/82/3534482_image2_1.jpg"
       },
       {
-        "name": "한울타리마을",
-        "category": "문화",
-        "lat": 37.6128390281,
-        "lng": 128.9747778772,
-        "image": "https://tong.visitkorea.or.kr/cms/resource/99/3378399_image2_1.JPG"
+        "name": "오죽헌",
+        "category": "역사",
+        "lat": 37.779138874844655,
+        "lng": 128.87966210169768,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/38/3527138_image2_1.jpg"
       },
       {
-        "name": "해살이마을",
-        "category": "문화",
-        "lat": 37.7929261321,
-        "lng": 128.8109759564,
-        "image": "https://tong.visitkorea.or.kr/cms/resource/60/3383760_image2_1.JPG"
+        "name": "안목해변",
+        "category": "해변",
+        "lat": 37.7725952413582,
+        "lng": 128.947321445483,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/49/2921949_image2_1.jpg"
       }
     ],
     "jeonju": [
