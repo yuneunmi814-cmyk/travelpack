@@ -168,6 +168,10 @@ export interface SpotDetail {
   nearbySpots: { id: string; name: string; category: string; distanceM: number }[]
   isBookmarked: boolean | null
   audioGuides: AudioGuide[]
+  // 공공데이터 관광 3종
+  petInfo: Record<string, string> | null
+  barrierFree: Record<string, string> | null
+  relatedSpots: { name: string; category?: string; rank?: number }[]
 }
 
 export interface TripVisit {

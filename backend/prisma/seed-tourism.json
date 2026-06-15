@@ -1,0 +1,669 @@
+{
+  "전주 한옥마을": {
+    "tourapiContentId": "2736325",
+    "petInfo": null,
+    "barrierFree": null,
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": false
+  },
+  "오목대와 이목대": {
+    "tourapiContentId": "126621",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(한옥마을 공영주차장)_무장애 편의시설",
+      "휠체어": "대여 가능(2대/오목대 관광안내소)",
+      "점자블록": "점자블록 있음(주요시설 앞)_시각장애인 편의시설",
+      "장애인화장실": "장애인 화장실 있음(1곳, 남녀 공용)",
+      "대중교통/접근": "출입구까지 경사로가 설치되어 있음(완만함)"
+    },
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "객사길": {
+    "tourapiContentId": "2774063",
+    "petInfo": null,
+    "barrierFree": {
+      "출입": "주출입구는 턱이 없어 휠체어 접근 가능함_무장애 편의시설",
+      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함"
+    },
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "함덕해수욕장": {
+    "tourapiContentId": "126451",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 전용 주차구역 있음_무장애 편의시설",
+      "장애인화장실": "장애인 화장실 있음"
+    },
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "감천문화마을": {
+    "tourapiContentId": "3110783",
+    "petInfo": null,
+    "barrierFree": null,
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": false
+  },
+  "비자림": {
+    "tourapiContentId": "126472",
+    "petInfo": null,
+    "barrierFree": null,
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": false
+  },
+  "만장굴": {
+    "tourapiContentId": "126452",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 전용 주차구역 주차 대수 : 9대주변 휠체어 이용자 등이 이용할 수 있는 여유공간 있음.관광지 주출입구까지의 거리 : 약 180m",
+      "이동경로": "대중교통 이용가능 : 만장굴[서] 정류장저상버스 없음.",
+      "장애인화장실": "장애인 화장실 있음"
+    },
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "광안리해수욕장": {
+    "tourapiContentId": "126078",
+    "petInfo": {
+      "안내": "- 맹견의 경우, 입마개 착용 필수\n- 배변봉투 지참 및 배변처리 필수",
+      "준비물": "목줄 착용",
+      "동반유형": "일부구역 동반가능",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": {
+      "출입": "주출입구는 턱이 없어 휠체어 접근 가능함",
+      "장애인화장실": "장애인 화장실 있음_무장애 편의시설",
+      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함"
+    },
+    "relatedSpots": [
+      {
+        "name": "해운대해수욕장",
+        "rank": 1,
+        "category": "자연관광"
+      },
+      {
+        "name": "송정해수욕장",
+        "rank": 2,
+        "category": "자연관광"
+      },
+      {
+        "name": "신세계백화점/센텀시티점",
+        "rank": 3,
+        "category": "쇼핑"
+      },
+      {
+        "name": "자갈치시장",
+        "rank": 4,
+        "category": "쇼핑"
+      },
+      {
+        "name": "오륙도스카이워크",
+        "rank": 5,
+        "category": "문화관광"
+      },
+      {
+        "name": "신라스테이/해운대",
+        "rank": 6,
+        "category": "숙박"
+      },
+      {
+        "name": "태종대",
+        "rank": 7,
+        "category": "역사관광"
+      },
+      {
+        "name": "해운대달맞이길",
+        "rank": 8,
+        "category": "기타관광"
+      }
+    ],
+    "petFriendly": true,
+    "hasBarrierFree": true
+  },
+  "해동용궁사": {
+    "tourapiContentId": "126848",
+    "petInfo": {
+      "안내": "- 맹견의 경우, 입마개 착용 필수- 배변봉투 지참 및 배변처리 필수",
+      "준비물": "목줄 착용",
+      "동반유형": "일부구역 동반가능",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": null,
+    "relatedSpots": null,
+    "petFriendly": true,
+    "hasBarrierFree": false
+  },
+  "불국사": {
+    "tourapiContentId": "1603100",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 주차장 4칸 있음",
+      "휠체어": "대여 가능(8대/입구)"
+    },
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "첨성대": {
+    "tourapiContentId": "3469628",
+    "petInfo": null,
+    "barrierFree": null,
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": false
+  },
+  "향일암": {
+    "tourapiContentId": "127715",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 전용 주차구역 있음(공영주차장에 3개)_무장애 편의시설",
+      "장애인화장실": "장애인 화장실 있음"
+    },
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "정동진": {
+    "tourapiContentId": "3545967",
+    "petInfo": {
+      "동반유형": "일부구역 동반가능"
+    },
+    "barrierFree": {
+      "주차": "위치 : 지상주차장, 개수 : 4대",
+      "출입": "출입구에 턱이 없음, 자동문",
+      "이동경로": "112, 113번 버스 정동진역 하차 후 도보 2분",
+      "장애인화장실": "장애인 화장실 있음",
+      "대중교통/접근": "출입구에 턱이 없어 휠체어 접근 가능"
+    },
+    "relatedSpots": null,
+    "petFriendly": true,
+    "hasBarrierFree": true
+  },
+  "오죽헌": {
+    "tourapiContentId": "1348733",
+    "petInfo": null,
+    "barrierFree": null,
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": false
+  },
+  "해운대해수욕장": {
+    "tourapiContentId": "126081",
+    "petInfo": {
+      "안내": "- 맹견의 경우, 입마개 착용 필수- 배변봉투 지참 및 배변처리 필수",
+      "준비물": "목줄 착용",
+      "동반유형": "일부구역 동반가능",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(광장주차장)_무장애 편의시설",
+      "출입": "주 출입구는 턱이 없어 휠체어 접근 가능함",
+      "휠체어": "대여 가능(1층 관광안내소,신분증제출)",
+      "장애인화장실": "장애인 화장실 있음(관광안내소 옆, 송림공원 인근)",
+      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함"
+    },
+    "relatedSpots": null,
+    "petFriendly": true,
+    "hasBarrierFree": true
+  },
+  "광치기 해변": {
+    "tourapiContentId": null,
+    "petInfo": null,
+    "barrierFree": null,
+    "relatedSpots": [
+      {
+        "name": "성산일출봉",
+        "rank": 1,
+        "category": "자연관광"
+      },
+      {
+        "name": "섭지코지",
+        "rank": 2,
+        "category": "기타관광"
+      },
+      {
+        "name": "혼인지",
+        "rank": 3,
+        "category": "기타관광"
+      },
+      {
+        "name": "신양섭지해수욕장",
+        "rank": 4,
+        "category": "자연관광"
+      },
+      {
+        "name": "성산포종합여객터미널",
+        "rank": 5,
+        "category": "기타관광"
+      },
+      {
+        "name": "가시아방국수",
+        "rank": 6,
+        "category": "음식"
+      },
+      {
+        "name": "소금바치순이네",
+        "rank": 7,
+        "category": "음식"
+      },
+      {
+        "name": "아쿠아플라넷/제주",
+        "rank": 8,
+        "category": "문화관광"
+      }
+    ],
+    "petFriendly": false,
+    "hasBarrierFree": false
+  },
+  "성산일출봉": {
+    "tourapiContentId": "126435",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 전용 주차구역 주차대수 : 8대(성산일출봉주차장)<br/>주변 휠체어 이용자 등이 이용할 수 있는 여유공간 있음.<br/>관광지까지의 거리 : 약 100m",
+      "안내인": "관광해설사 안내 가능",
+      "휠체어": "대여가능(1대/관리사무소)",
+      "이동경로": "대중교통 이용가능 : 성산일출봉입구[서] 정류장<br/>저상버스 없음.",
+      "장애인화장실": "장애인 화장실 있음"
+    },
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "섭지코지": {
+    "tourapiContentId": "127813",
+    "petInfo": {
+      "안내": "- 맹견의 경우, 입마개 착용 필수\n- 배변봉투 지참 및 배변처리 필수",
+      "준비물": "목줄 착용",
+      "동반유형": "일부구역 동반가능",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": {
+      "주차": "장애인전용주차구역 있음(섭지코지 주차장, 웰컴센터 주차장)_무장애 편의시설",
+      "출입": "단차없이 출입가능, 보행로 구간에 따라 기울기 차이가 다소 있음",
+      "장애인화장실": "장애인용화장실 있음(섭지코지 주차장,웰컴센터 주차장에 위치, 대변기 전면 접근이 가능하나 측면 접근은 불가능함)",
+      "대중교통/접근": "섭지코지 앞까지 차량으로 접근 가능함\n산책로 입구 턱 없음, 휠체어 이동 가능(최고 경사도 15~17도)\n성당건물이 있는 곳까지는 경사로가 가파름"
+    },
+    "relatedSpots": null,
+    "petFriendly": true,
+    "hasBarrierFree": true
+  },
+  "동문재래시장": {
+    "tourapiContentId": "1013246",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(6대)_무장애 편의시설",
+      "출입": "주출입구는 턱이 없어 휠체어 접근 가능함",
+      "휠체어": "대여 가능(1대/고객지원센터)",
+      "장애인화장실": "장애인 화장실 있음",
+      "대중교통/접근": "출입구까지 경사로가 설치되어 있음(완만함)"
+    },
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "태종대": {
+    "tourapiContentId": "126658",
+    "petInfo": {
+      "안내": "- 맹견의 경우, 입마개 착용 필수- 배변봉투 지참 및 배변처리 필수",
+      "준비물": "목줄 착용",
+      "동반유형": "일부구역 동반가능",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": {
+      "주차": "장애인전용 주차구역 있음_무장애 편의시설 장애인의 경우 무료이용 가능",
+      "출입": "주출입구 무단차원활한 이동 가능함",
+      "휠체어": "휠체어 대여 가능함(관광안내소)",
+      "장애인화장실": "장애인 화장실 있음"
+    },
+    "relatedSpots": [
+      {
+        "name": "국립해양박물관",
+        "rank": 1,
+        "category": "문화관광"
+      },
+      {
+        "name": "자갈치시장",
+        "rank": 2,
+        "category": "쇼핑"
+      },
+      {
+        "name": "흰여울문화마을",
+        "rank": 3,
+        "category": "기타관광"
+      },
+      {
+        "name": "피아크카페앤베이커리",
+        "rank": 4,
+        "category": "음식"
+      },
+      {
+        "name": "국제시장",
+        "rank": 5,
+        "category": "쇼핑"
+      },
+      {
+        "name": "송도해상케이블카",
+        "rank": 6,
+        "category": "기타관광"
+      },
+      {
+        "name": "피아크",
+        "rank": 7,
+        "category": "문화관광"
+      },
+      {
+        "name": "롯데백화점/광복점",
+        "rank": 8,
+        "category": "쇼핑"
+      }
+    ],
+    "petFriendly": true,
+    "hasBarrierFree": true
+  },
+  "오동도": {
+    "tourapiContentId": "129152",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(2대)_무장애 편의시설",
+      "안내인": "안내요원 있음(주 출입구, 관광안내소)",
+      "큰글씨": "큰활자홍보물 있음",
+      "휠체어": "대여 가능(총 8대/오동도 등대 입구 및 안쪽 각 4대/열차탑승장에 문의)",
+      "음성안내": "음성안내기 있음(스피커)",
+      "이동경로": "버스 2번, 68번, 76번, 333번 탑승",
+      "점자블록": "점자블록 있음(화장실 입구)_시각장애인 편의시설",
+      "엘리베이터": "엘리베이터 있음(전망대)",
+      "장애인화장실": "장애인 화장실 있음(가족형)_무장애 편의시설",
+      "대중교통/접근": "출입구까지 경사로가 설치되어 있음(가파름)_무장애 편의시설"
+    },
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "안목해변": {
+    "tourapiContentId": "127722",
+    "petInfo": {
+      "안내": "- 해수욕장 개장시 제한될수있음- 바다 입수 불가능(펫비치내 해변가 산책만 가능)- 앉은키 1m 이상의 대형견 입장 제한 - 맹견의 경우, 입마개 착용 필수- 배변봉투 지참 및 배변처리 필수",
+      "준비물": "입마개 착용,목줄 착용,기타",
+      "동반유형": "일부구역 동반가능",
+      "비치시설": "샤워장",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(안목 공영화장실 방면) / 1면",
+      "출입": "주출입구는 턱이 없어 휠체어 접근 가능함",
+      "이동경로": "강릉시외버스터미널 하차시 : 강릉시외고속버스 정류장에서 302-1번 버스 승차 안목커피거리정류장에서 하차, 300m 이동강릉역 하차시 : 강릉역 정류장에서 225-1번, 314-1번 버스 승차 안목커피거리정류장에서 하차, 300m 이동",
+      "장애인화장실": "장애인 화장실 있음(안목 공영화장실)",
+      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함"
+    },
+    "relatedSpots": null,
+    "petFriendly": true,
+    "hasBarrierFree": true
+  },
+  "경기전": {
+    "tourapiContentId": "147656",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(한옥마을 공영주차장)_무장애 편의시설",
+      "출입": "주 출입구는 경사로가 있어 휠체어 접근 가능함",
+      "휠체어": "대여 가능(2대/경기전 여행자라운지)",
+      "점자블록": "점자블록 있음(주요시설 앞)_시각장애인 편의시설",
+      "장애인화장실": "장애인 화장실 있음",
+      "대중교통/접근": "출입구까지 경사로가 설치되어 있음(완만함)"
+    },
+    "relatedSpots": [
+      {
+        "name": "전주한옥마을",
+        "rank": 1,
+        "category": "역사관광"
+      },
+      {
+        "name": "남부시장",
+        "rank": 2,
+        "category": "쇼핑"
+      },
+      {
+        "name": "라한호텔/전주",
+        "rank": 3,
+        "category": "숙박"
+      },
+      {
+        "name": "오목대",
+        "rank": 4,
+        "category": "역사관광"
+      },
+      {
+        "name": "전주시그니처호텔",
+        "rank": 5,
+        "category": "숙박"
+      },
+      {
+        "name": "베스트웨스턴플러스/전주호텔",
+        "rank": 6,
+        "category": "숙박"
+      },
+      {
+        "name": "삼백집",
+        "rank": 7,
+        "category": "음식"
+      },
+      {
+        "name": "전주덕진공원",
+        "rank": 8,
+        "category": "문화관광"
+      }
+    ],
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "전주향교": {
+    "tourapiContentId": "147684",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(한옥마을 공영주차장)_무장애 편의시설",
+      "출입": "주 출입구는 턱이 없어 휠체어 접근 가능함",
+      "음성안내": "음성 안내 버튼 있음(점자안내판)",
+      "장애인화장실": "장애인 화장실 있음(전주향교문화관, 완판본문화관)",
+      "대중교통/접근": "출입구까지 경사로가 설치되어 있음(완만함)"
+    },
+    "relatedSpots": [
+      {
+        "name": "모래내시장",
+        "rank": 1,
+        "category": "쇼핑"
+      },
+      {
+        "name": "로데오모텔",
+        "rank": 2,
+        "category": "숙박"
+      },
+      {
+        "name": "스타벅스/전주평화DT점",
+        "rank": 3,
+        "category": "음식"
+      },
+      {
+        "name": "화심순두부/본점",
+        "rank": 4,
+        "category": "음식"
+      },
+      {
+        "name": "글로스터호텔/전주",
+        "rank": 5,
+        "category": "숙박"
+      },
+      {
+        "name": "자만벽화마을",
+        "rank": 6,
+        "category": "기타관광"
+      },
+      {
+        "name": "풍년제과/본점",
+        "rank": 7,
+        "category": "음식"
+      },
+      {
+        "name": "한국집/전주본점",
+        "rank": 8,
+        "category": "음식"
+      }
+    ],
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "여수 해상케이블카": {
+    "tourapiContentId": "1997202",
+    "petInfo": {
+      "안내": "몸 전체가 이동장(켄넬) 안에 들어가야 동반 가능",
+      "준비물": "이동장(켄넬)사용",
+      "동반유형": "일부구역 동반가능",
+      "동반가능동물": "이동장(켄넬)에 들어가는 전 견종 동반 가능"
+    },
+    "barrierFree": {
+      "주차": "장애인 주차장 있음_무장애 편의시설",
+      "출입": "주출입구는 턱이 없어 휠체어 접근 가능함(케이블카에 휠체어 탑승가능/전동 제외)",
+      "휠체어": "대여가능(매표소/2대)",
+      "점자블록": "점자블록 있음(주요시설 앞)_시각장애인 편의시설",
+      "엘리베이터": "엘리베이터 있음",
+      "장애인화장실": "장애인 화장실 있음",
+      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함"
+    },
+    "relatedSpots": null,
+    "petFriendly": true,
+    "hasBarrierFree": true
+  },
+  "돌산공원": {
+    "tourapiContentId": "128755",
+    "petInfo": {
+      "안내": "- 맹견의 경우, 입마개 착용 필수\n- 배변봉투 지참 및 배변처리 필수",
+      "준비물": "목줄 착용",
+      "동반유형": "전구역 동반가능",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": {
+      "점자블록": "점자유도로 있음(쪽빛화장실)_시각장애인 편의시설",
+      "장애인화장실": "장애인 화장실 있음",
+      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함_무장애 편의시설"
+    },
+    "relatedSpots": [
+      {
+        "name": "오동도",
+        "rank": 1,
+        "category": "자연관광"
+      },
+      {
+        "name": "여수낭만포차거리",
+        "rank": 2,
+        "category": "음식"
+      },
+      {
+        "name": "여수예술랜드",
+        "rank": 3,
+        "category": "레저스포츠"
+      },
+      {
+        "name": "유탑마리나호텔&리조트",
+        "rank": 4,
+        "category": "숙박"
+      },
+      {
+        "name": "향일암",
+        "rank": 5,
+        "category": "역사관광"
+      },
+      {
+        "name": "청정게장촌",
+        "rank": 6,
+        "category": "음식"
+      },
+      {
+        "name": "꽃돌게장1번가",
+        "rank": 7,
+        "category": "음식"
+      },
+      {
+        "name": "라마다프라자바이윈덤/여수",
+        "rank": 8,
+        "category": "숙박"
+      }
+    ],
+    "petFriendly": true,
+    "hasBarrierFree": true
+  },
+  "이순신광장": {
+    "tourapiContentId": "2612869",
+    "petInfo": {
+      "안내": "- 맹견의 경우, 입마개 착용 필수\n- 배변봉투 지참 및 배변처리 필수",
+      "준비물": "목줄 착용",
+      "동반유형": "전구역 동반가능",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(공영주차장)_무장애 편의시설",
+      "출입": "주출입구는 턱이 없어 휠체어 접근 가능함",
+      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함"
+    },
+    "relatedSpots": null,
+    "petFriendly": true,
+    "hasBarrierFree": true
+  },
+  "경포대": {
+    "tourapiContentId": "3540838",
+    "petInfo": null,
+    "barrierFree": {
+      "이동경로": "202-1번 버스 경포호 하차 후 도보 4분"
+    },
+    "relatedSpots": [
+      {
+        "name": "경포해변",
+        "rank": 1,
+        "category": "자연관광"
+      },
+      {
+        "name": "강릉중앙시장",
+        "rank": 2,
+        "category": "쇼핑"
+      },
+      {
+        "name": "주문진항",
+        "rank": 3,
+        "category": "자연관광"
+      },
+      {
+        "name": "오죽헌",
+        "rank": 4,
+        "category": "역사관광"
+      },
+      {
+        "name": "안목해변",
+        "rank": 5,
+        "category": "자연관광"
+      },
+      {
+        "name": "강릉커피거리",
+        "rank": 6,
+        "category": "음식"
+      },
+      {
+        "name": "주문진수산시장",
+        "rank": 7,
+        "category": "쇼핑"
+      },
+      {
+        "name": "강릉단오제",
+        "rank": 8,
+        "category": "문화관광"
+      }
+    ],
+    "petFriendly": false,
+    "hasBarrierFree": true
+  }
+}

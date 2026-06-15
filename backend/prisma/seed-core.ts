@@ -1,6 +1,11 @@
 import { readFileSync } from 'node:fs'
-import type { PrismaClient } from '@prisma/client'
+import type { Prisma, PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
+
+// 공공데이터 관광 3종(반려동물·무장애·연관관광지) — sync:tourism 결과를 시드에 구워둠(이름 매칭, 라이브 API 없이 재현)
+interface TourismSeed { tourapiContentId: string | null; petInfo: unknown; barrierFree: unknown; relatedSpots: unknown; petFriendly: boolean; hasBarrierFree: boolean }
+const TOURISM_SEED: Record<string, TourismSeed> =
+  JSON.parse(readFileSync(new URL('./seed-tourism.json', import.meta.url), 'utf8'))
 
 // 전국 지역 대표 관광지(한국관광공사 TourAPI) — npm run db:seed 시 옵션으로 적재
 interface RegionSpot { name: string; category: string; lat: number; lng: number; image: string }
@@ -221,6 +226,16 @@ export async function runSeed(prisma: PrismaClient, adminPassword: string, round
         },
       })
     }
+  }
+
+  // 공공데이터 관광 3종 적용(이름 매칭) — 생성된 스팟에 반려동물·무장애·연관 정보 주입
+  for (const [name, t] of Object.entries(TOURISM_SEED)) {
+    const data: Prisma.SpotUpdateManyMutationInput = { petFriendly: t.petFriendly, hasBarrierFree: t.hasBarrierFree }
+    if (t.tourapiContentId) data.tourapiContentId = t.tourapiContentId
+    if (t.petInfo) data.petInfo = t.petInfo as Prisma.InputJsonValue
+    if (t.barrierFree) data.barrierFree = t.barrierFree as Prisma.InputJsonValue
+    if (t.relatedSpots) data.relatedSpots = t.relatedSpots as Prisma.InputJsonValue
+    await prisma.spot.updateMany({ where: { name }, data })
   }
 
   return {

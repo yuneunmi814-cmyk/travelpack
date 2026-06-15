@@ -53,6 +53,13 @@ export function SpotDetailScreen({ navigation, route }: Props) {
           </View>
         </View>
 
+        {(data.petInfo || data.barrierFree) && (
+          <View style={{ flexDirection: 'row', gap: 6, flexWrap: 'wrap' }}>
+            {data.petInfo && <Badge label="🐾 반려동물 동반" tone="navy" />}
+            {data.barrierFree && <Badge label="♿ 무장애 편의" tone="navy" />}
+          </View>
+        )}
+
         <Card style={{ padding: space(4) }}>
           <Row label="운영시간" value={data.todayHours ?? '정보 없음'} accent={data.todayOpen === true ? '영업 중' : data.todayOpen === false ? '영업 종료' : undefined} />
           {data.admissionFee && <Row label="입장료" value={data.admissionFee} />}
@@ -69,6 +76,24 @@ export function SpotDetailScreen({ navigation, route }: Props) {
         )}
 
         <AudioGuideList guides={data.audioGuides} />
+
+        {data.petInfo && <InfoSection title="🐾 반려동물 동반여행" data={data.petInfo} />}
+        {data.barrierFree && <InfoSection title="♿ 무장애 여행 정보" data={data.barrierFree} />}
+
+        {data.relatedSpots && data.relatedSpots.length > 0 && (
+          <View style={{ gap: 6 }}>
+            <Text style={styles.section}>함께 가는 관광지</Text>
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
+              {data.relatedSpots.map((r, i) => (
+                <View key={i} style={styles.relChip}>
+                  <Text style={{ color: colors.text, fontSize: 12 }}>{r.name}</Text>
+                  {r.category && <Text style={{ color: colors.textHint, fontSize: 10 }}> · {r.category}</Text>}
+                </View>
+              ))}
+            </View>
+            <Text style={{ fontSize: 11, color: colors.textHint }}>출처: 한국관광 데이터랩(연관 관광지)</Text>
+          </View>
+        )}
 
         {data.description && <Text style={{ color: colors.textSub, lineHeight: 22 }}>{data.description}</Text>}
 
@@ -108,9 +133,27 @@ function Row({ label, value, accent }: { label: string; value: string; accent?: 
   )
 }
 
+// 공공데이터 정보(반려동물·무장애) — 키:값 카드
+function InfoSection({ title, data }: { title: string; data: Record<string, string> }) {
+  return (
+    <View style={{ gap: 6 }}>
+      <Text style={styles.section}>{title}</Text>
+      <Card style={{ padding: space(4), gap: 8 }}>
+        {Object.entries(data).map(([k, v]) => (
+          <View key={k} style={{ gap: 2 }}>
+            <Text style={{ color: colors.textSub, fontSize: 12, fontWeight: '700' }}>{k}</Text>
+            <Text style={{ color: colors.text, fontSize: 13, lineHeight: 19 }}>{v}</Text>
+          </View>
+        ))}
+      </Card>
+    </View>
+  )
+}
+
 const styles = StyleSheet.create({
   title: { fontSize: 18, fontWeight: '700', color: colors.text },
   section: { fontSize: 15, fontWeight: '600', color: colors.text, marginTop: 8 },
+  relChip: { flexDirection: 'row', alignItems: 'center', backgroundColor: colors.bg2, borderRadius: 999, paddingHorizontal: 10, paddingVertical: 6 },
   tip: { backgroundColor: colors.primaryWeak, borderRadius: 10, padding: space(4) },
   countBadge: { position: 'absolute', right: 10, bottom: 10, backgroundColor: 'rgba(0,0,0,0.45)', borderRadius: 999, paddingHorizontal: 9, paddingVertical: 3 },
   countText: { color: '#fff', fontSize: 11 },

@@ -336,6 +336,10 @@ exploreRouter.get(
         id: a.id, title: a.title, audioTitle: a.audioTitle, script: a.script,
         audioUrl: a.audioUrl, playTime: a.playTime, langCode: a.langCode, source: a.source,
       })),
+      // 공공데이터 보강: 반려동물 동반·무장애·연관 관광지
+      petInfo: spot.petInfo ?? null,
+      barrierFree: spot.barrierFree ?? null,
+      relatedSpots: (spot.relatedSpots as unknown[] | null) ?? [],
     })
   }),
 )

@@ -210,6 +210,11 @@ model Spot {
   checkinRadiusM  Int?       @map("checkin_radius_m")
   source          String     @default("EDITOR")
   tourapiContentId String?   @unique @map("tourapi_content_id")
+  petInfo         Json?      @map("pet_info")       // 반려동물 동반여행(TourAPI detailPetTour2)
+  barrierFree     Json?      @map("barrier_free")   // 무장애 여행(TourAPI detailWithTour2)
+  relatedSpots    Json?      @map("related_spots")  // 연관 관광지(데이터랩 TarRlteTar, [{name,category,rank}])
+  petFriendly     Boolean    @default(false) @map("pet_friendly")  // 필터용 플래그
+  hasBarrierFree  Boolean    @default(false) @map("has_barrier_free")
   createdAt       DateTime   @default(now()) @map("created_at")
   updatedAt       DateTime   @updatedAt @map("updated_at")
 

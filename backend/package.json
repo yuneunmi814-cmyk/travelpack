@@ -22,6 +22,7 @@
     "sync:photos": "tsx scripts/sync-enrich.ts photos",
     "sync:i18n": "tsx scripts/sync-enrich.ts i18n",
     "sync:visitors": "tsx scripts/sync-enrich.ts visitors",
+    "sync:tourism": "tsx scripts/sync-tourism.ts",
     "purge": "tsx scripts/purge.ts"
   },
   "prisma": {
