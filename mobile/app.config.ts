@@ -37,6 +37,8 @@ const config: ExpoConfig = {
   },
   plugins,
   web: { favicon: './assets/favicon.png' },
+  owner: 'eunmiyoon',
+  extra: { eas: { projectId: '1f304bfc-316e-4c2e-bde2-925ee7040daf' } },
 }
 
 export default config
