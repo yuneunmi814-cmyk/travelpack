@@ -5,7 +5,7 @@ name: keepalive
 # (GitHub 예약 워크플로는 부하 시 지연될 수 있음 — 확실한 가동시간은 cron-job.org 등 외부 모니터 권장)
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '*/5 * * * *'  # GitHub 최소 간격(예약은 지연될 수 있음 — 확실한 보온은 cron-job.org 등 외부 모니터/Render Starter)
   workflow_dispatch: {}
 
 jobs:
