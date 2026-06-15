@@ -1,0 +1,23 @@
+name: keepalive
+
+# Render 무료 인스턴스는 15분 무요청 시 슬립(첫 요청 ~50초 cold start).
+# 10분마다 /health를 핑해서 깨어있게 유지 → 앱 첫 화면/로그인 타임아웃 방지.
+# (GitHub 예약 워크플로는 부하 시 지연될 수 있음 — 확실한 가동시간은 cron-job.org 등 외부 모니터 권장)
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping backend health
+        run: |
+          for i in 1 2 3 4; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 70 https://travelpack-api.onrender.com/health || echo 000)
+            echo "attempt $i -> HTTP $code"
+            [ "$code" = "200" ] && exit 0
+            sleep 20
+          done
+          echo "keepalive ping did not get 200 (non-fatal)"; exit 0

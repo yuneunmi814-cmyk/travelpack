@@ -9,7 +9,7 @@ import type { CourseCard, HomeFeed, MarketCard, Paged, Region } from '../api/typ
 type Props = BottomTabScreenProps<TabParams, 'HomeTab'>
 
 export function HomeScreen({ navigation }: Props) {
-  const { data, loading, error } = useResource<HomeFeed>('/home')
+  const { data, loading, error, reload } = useResource<HomeFeed>('/home')
   // 커뮤니티 인기 여행팩(사용자 공유) — 비어 있으면 섹션 숨김
   const community = useResource<Paged<MarketCard>>('/marketplace/courses?sort=popular&limit=10')
 
@@ -22,15 +22,23 @@ export function HomeScreen({ navigation }: Props) {
   function openMarketplace() {
     navigation.navigate('ExploreTab', { screen: 'Marketplace' })
   }
+  function openSearch() {
+    navigation.navigate('ExploreTab', { screen: 'Search' })
+  }
 
   if (loading) return <Loading />
-  if (error || !data) return <EmptyState text={error ?? '불러오기 실패'} />
+  if (error || !data) return <EmptyState text={error ? '불러오지 못했어요. 서버가 깨어나는 중일 수 있어요.' : '불러오기 실패'} onRetry={reload} />
 
   const communityPacks = community.data?.items ?? []
 
   return (
     <ScrollView style={{ backgroundColor: colors.bg }} contentContainerStyle={{ padding: space(5), gap: space(5) }}>
       <Text style={styles.brand}>TravelPack</Text>
+
+      <Pressable onPress={openSearch} style={styles.searchBar}>
+        <Text style={styles.searchIcon}>🔍</Text>
+        <Text style={styles.searchText}>지역·코스·관광지 검색</Text>
+      </Pressable>
 
       {data.banners[0] && (
         <Card style={{ backgroundColor: colors.navy }}>
@@ -123,6 +131,9 @@ function Section({ title, action, children }: { title: string; action?: { label:
 
 const styles = StyleSheet.create({
   brand: { fontSize: 18, fontWeight: '700', color: colors.primary },
+  searchBar: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: colors.bg2, borderRadius: 12, paddingHorizontal: 14, paddingVertical: 12 },
+  searchIcon: { fontSize: 14 },
+  searchText: { color: colors.textHint, fontSize: 14 },
   section: { fontSize: 16, fontWeight: '600', color: colors.text },
   more: { fontSize: 13, color: colors.primary, fontWeight: '600' },
   cardTitle: { fontSize: 13, fontWeight: '600', color: colors.text },

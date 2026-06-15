@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
-import { api, clearTokens, hasSession, loadTokens, setAuthLostHandler, setTokens } from '../api/client'
+import { api, clearTokens, hasSession, loadTokens, setAuthLostHandler, setTokens, warmup } from '../api/client'
 import { getKakaoAccessToken } from './social'
 import type { Me } from '../api/types'
 
@@ -46,6 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     setAuthLostHandler(() => setUser(null))
+    warmup() // Render 슬립 깨우기(파이어앤포겟) — 첫 화면/로그인 cold start 완화
     ;(async () => {
       await loadTokens()
       await refreshMe()
