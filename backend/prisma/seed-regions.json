@@ -189,6 +189,214 @@
         "lng": 127.143728744,
         "image": "https://tong.visitkorea.or.kr/cms/resource/59/3351559_image2_1.jpg"
       }
+    ],
+    "seoul": [
+      {
+        "name": "경복궁",
+        "category": "역사",
+        "lat": 37.576030700049394,
+        "lng": 126.97672186606306,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/98/3487598_image2_1.jpg"
+      },
+      {
+        "name": "북촌한옥마을",
+        "category": "문화",
+        "lat": 37.5790529392,
+        "lng": 126.9867060298,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/04/3304404_image2_1.jpg"
+      },
+      {
+        "name": "광장시장",
+        "category": "시장",
+        "lat": 37.5701653166,
+        "lng": 126.9997217621,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/81/2668981_image2_1.jpg"
+      },
+      {
+        "name": "남산서울타워",
+        "category": "전망",
+        "lat": 37.5510545366352,
+        "lng": 126.987882083295,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/70/3089670_image2_1.jpg"
+      }
+    ],
+    "incheon": [
+      {
+        "name": "송도센트럴파크",
+        "category": "자연",
+        "lat": 37.3903993102,
+        "lng": 126.6435981392,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/19/3512919_image2_1.jpg"
+      },
+      {
+        "name": "월미도",
+        "category": "해변",
+        "lat": 37.4722,
+        "lng": 126.6001,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/94/3518594_image2_1.jpg"
+      },
+      {
+        "name": "인천대공원",
+        "category": "자연",
+        "lat": 37.45761997324,
+        "lng": 126.749258005815,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/53/4061653_image2_1.jpg"
+      },
+      {
+        "name": "소래포구",
+        "category": "시장",
+        "lat": 37.3988547472195,
+        "lng": 126.74004666263,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/65/4039065_image2_1.jpg"
+      }
+    ],
+    "daegu": [
+      {
+        "name": "김광석다시그리기길",
+        "category": "문화",
+        "lat": 35.8614600628,
+        "lng": 128.6074868512,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/95/2947395_image2_1.jpg"
+      },
+      {
+        "name": "이월드",
+        "category": "테마파크",
+        "lat": 35.8548822436,
+        "lng": 128.5648324581,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/82/2818982_image2_1.jpg"
+      },
+      {
+        "name": "서문시장",
+        "category": "시장",
+        "lat": 36.63547643,
+        "lng": 127.4857373141,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/41/3461441_image2_1.jpg"
+      },
+      {
+        "name": "앞산공원",
+        "category": "자연",
+        "lat": 35.8290189503,
+        "lng": 128.5890560428,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/43/3338343_image2_1.jpg"
+      },
+      {
+        "name": "수성못",
+        "category": "자연",
+        "lat": 35.8276418564,
+        "lng": 128.6177257792,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/51/2653751_image2_1.jpg"
+      }
+    ],
+    "daejeon": [
+      {
+        "name": "한밭수목원",
+        "category": "자연",
+        "lat": 36.3685826106998,
+        "lng": 127.386251630496,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/68/3350768_image2_1.jpg"
+      },
+      {
+        "name": "으능정이거리",
+        "category": "거리",
+        "lat": 36.3291243747,
+        "lng": 127.4276592379,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/55/3526655_image2_1.jpg"
+      },
+      {
+        "name": "장태산자연휴양림",
+        "category": "자연",
+        "lat": 36.2159112482284,
+        "lng": 127.341257320067,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/42/3569842_image2_1.jpg"
+      },
+      {
+        "name": "대청호",
+        "category": "자연",
+        "lat": 36.4011148323,
+        "lng": 127.5101665667,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/66/3303866_image2_1.jpg"
+      },
+      {
+        "name": "대전 오월드",
+        "category": "테마파크",
+        "lat": 36.2872648472553,
+        "lng": 127.400110860362,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/97/3513197_image2_1.jpg"
+      }
+    ],
+    "gwangju": [
+      {
+        "name": "국립아시아문화전당",
+        "category": "문화",
+        "lat": 35.1460861028,
+        "lng": 126.9192936186,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/59/3083359_image2_1.jpg"
+      },
+      {
+        "name": "양림동 역사문화마을",
+        "category": "문화",
+        "lat": 35.1397,
+        "lng": 126.9113,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/80/3514580_image2_1.jpg"
+      },
+      {
+        "name": "무등산국립공원",
+        "category": "자연",
+        "lat": 37.5219549732,
+        "lng": 127.0399333544,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/89/1838489_image2_1.jpg"
+      },
+      {
+        "name": "사직공원전망타워",
+        "category": "전망",
+        "lat": 35.1416137678,
+        "lng": 126.911488839,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/65/2755565_image2_1.png"
+      },
+      {
+        "name": "1913송정역시장",
+        "category": "시장",
+        "lat": 35.1353407217,
+        "lng": 126.7917329445,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/96/2617796_image2_1.jpg"
+      }
+    ],
+    "sokcho": [
+      {
+        "name": "설악산국립공원",
+        "category": "자연",
+        "lat": 38.0854190277304,
+        "lng": 128.449327966942,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/45/3505945_image2_1.jpg"
+      },
+      {
+        "name": "속초해수욕장",
+        "category": "해변",
+        "lat": 38.1906064639,
+        "lng": 128.6019575219,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/68/2733168_image2_1.jpg"
+      },
+      {
+        "name": "대포항",
+        "category": "시장",
+        "lat": 38.1748951238747,
+        "lng": 128.607433369894,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/56/4066656_image2_1.jpg"
+      },
+      {
+        "name": "영금정",
+        "category": "자연",
+        "lat": 38.2119011984,
+        "lng": 128.6014624568,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/01/3576201_image2_1.jpg"
+      },
+      {
+        "name": "속초관광수산시장",
+        "category": "시장",
+        "lat": 38.2039356903525,
+        "lng": 128.590522986422,
+        "image": "https://tong.visitkorea.or.kr/cms/resource/67/4041467_image2_1.jpg"
+      }
     ]
   }
 }

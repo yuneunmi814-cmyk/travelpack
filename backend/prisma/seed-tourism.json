@@ -1,21 +1,72 @@
 {
-  "전주 한옥마을": {
-    "tourapiContentId": "2736325",
-    "petInfo": null,
-    "barrierFree": null,
-    "relatedSpots": null,
-    "petFriendly": false,
-    "hasBarrierFree": false
-  },
-  "오목대와 이목대": {
-    "tourapiContentId": "126621",
+  "1913송정역시장": {
+    "tourapiContentId": "2488192",
     "petInfo": null,
     "barrierFree": {
-      "주차": "장애인 주차장 있음(한옥마을 공영주차장)_무장애 편의시설",
-      "휠체어": "대여 가능(2대/오목대 관광안내소)",
-      "점자블록": "점자블록 있음(주요시설 앞)_시각장애인 편의시설",
-      "장애인화장실": "장애인 화장실 있음(1곳, 남녀 공용)",
-      "대중교통/접근": "출입구까지 경사로가 설치되어 있음(완만함)"
+      "주차": "장애인 주차장 있음_무장애 편의시설",
+      "출입": "주출입구는 턱이 없어 휠체어 접근 가능함",
+      "점자블록": "점자블록 있음(화장실, 엘리베이터 앞)_시각장애인 편의시설",
+      "엘리베이터": "엘리베이터 있음",
+      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함(좁거나 입구에 턱이 있는 구간있음)"
+    },
+    "relatedSpots": [
+      {
+        "name": "롯데아울렛/광주수완점",
+        "rank": 1,
+        "category": "쇼핑"
+      },
+      {
+        "name": "광주공항",
+        "rank": 2,
+        "category": "기타관광"
+      },
+      {
+        "name": "송정5일시장",
+        "rank": 3,
+        "category": "쇼핑"
+      },
+      {
+        "name": "펭귄마을",
+        "rank": 4,
+        "category": "기타관광"
+      },
+      {
+        "name": "서울곱창",
+        "rank": 5,
+        "category": "음식"
+      },
+      {
+        "name": "광주양동시장",
+        "rank": 6,
+        "category": "쇼핑"
+      },
+      {
+        "name": "명화식육식당",
+        "rank": 7,
+        "category": "음식"
+      },
+      {
+        "name": "시장국밥/본점",
+        "rank": 8,
+        "category": "음식"
+      }
+    ],
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "속초해수욕장": {
+    "tourapiContentId": "125707",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(각 13대, 5대/제1공영주차장, 제2공영주차장)_무장애 편의시설",
+      "출입": "주출입구는 턱이 없어 휠체어 접근 가능함",
+      "안내인": "안내요원 있음",
+      "휠체어": "대여가능(해변용 휠체어 3대, 일반 휠체어 2대/행정지원센터)",
+      "음성안내": "음성버튼(점자안내판) 있음",
+      "이동경로": "버스 1, 1-1, 7, 7-1, 9, 9-1, 93번 탑승",
+      "점자블록": "점자블록 있음(화장실, 속초행정지원센터 전면)_시각장애인 편의시설",
+      "장애인화장실": "장애인 화장실 있음",
+      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함"
     },
     "relatedSpots": null,
     "petFriendly": false,
@@ -27,17 +78,6 @@
     "barrierFree": {
       "출입": "주출입구는 턱이 없어 휠체어 접근 가능함_무장애 편의시설",
       "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함"
-    },
-    "relatedSpots": null,
-    "petFriendly": false,
-    "hasBarrierFree": true
-  },
-  "함덕해수욕장": {
-    "tourapiContentId": "126451",
-    "petInfo": null,
-    "barrierFree": {
-      "주차": "장애인 전용 주차구역 있음_무장애 편의시설",
-      "장애인화장실": "장애인 화장실 있음"
     },
     "relatedSpots": null,
     "petFriendly": false,
@@ -58,76 +98,6 @@
     "relatedSpots": null,
     "petFriendly": false,
     "hasBarrierFree": false
-  },
-  "만장굴": {
-    "tourapiContentId": "126452",
-    "petInfo": null,
-    "barrierFree": {
-      "주차": "장애인 전용 주차구역 주차 대수 : 9대주변 휠체어 이용자 등이 이용할 수 있는 여유공간 있음.관광지 주출입구까지의 거리 : 약 180m",
-      "이동경로": "대중교통 이용가능 : 만장굴[서] 정류장저상버스 없음.",
-      "장애인화장실": "장애인 화장실 있음"
-    },
-    "relatedSpots": null,
-    "petFriendly": false,
-    "hasBarrierFree": true
-  },
-  "광안리해수욕장": {
-    "tourapiContentId": "126078",
-    "petInfo": {
-      "안내": "- 맹견의 경우, 입마개 착용 필수\n- 배변봉투 지참 및 배변처리 필수",
-      "준비물": "목줄 착용",
-      "동반유형": "일부구역 동반가능",
-      "동반가능동물": "전 견종 동반 가능"
-    },
-    "barrierFree": {
-      "출입": "주출입구는 턱이 없어 휠체어 접근 가능함",
-      "장애인화장실": "장애인 화장실 있음_무장애 편의시설",
-      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함"
-    },
-    "relatedSpots": [
-      {
-        "name": "해운대해수욕장",
-        "rank": 1,
-        "category": "자연관광"
-      },
-      {
-        "name": "송정해수욕장",
-        "rank": 2,
-        "category": "자연관광"
-      },
-      {
-        "name": "신세계백화점/센텀시티점",
-        "rank": 3,
-        "category": "쇼핑"
-      },
-      {
-        "name": "자갈치시장",
-        "rank": 4,
-        "category": "쇼핑"
-      },
-      {
-        "name": "오륙도스카이워크",
-        "rank": 5,
-        "category": "문화관광"
-      },
-      {
-        "name": "신라스테이/해운대",
-        "rank": 6,
-        "category": "숙박"
-      },
-      {
-        "name": "태종대",
-        "rank": 7,
-        "category": "역사관광"
-      },
-      {
-        "name": "해운대달맞이길",
-        "rank": 8,
-        "category": "기타관광"
-      }
-    ],
-    "petFriendly": true,
-    "hasBarrierFree": true
   },
   "해동용궁사": {
     "tourapiContentId": "126848",
@@ -195,6 +165,403 @@
     "relatedSpots": null,
     "petFriendly": false,
     "hasBarrierFree": false
+  },
+  "섭지코지": {
+    "tourapiContentId": "127813",
+    "petInfo": {
+      "안내": "- 맹견의 경우, 입마개 착용 필수\n- 배변봉투 지참 및 배변처리 필수",
+      "준비물": "목줄 착용",
+      "동반유형": "일부구역 동반가능",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": {
+      "주차": "장애인전용주차구역 있음(섭지코지 주차장, 웰컴센터 주차장)_무장애 편의시설",
+      "출입": "단차없이 출입가능, 보행로 구간에 따라 기울기 차이가 다소 있음",
+      "장애인화장실": "장애인용화장실 있음(섭지코지 주차장,웰컴센터 주차장에 위치, 대변기 전면 접근이 가능하나 측면 접근은 불가능함)",
+      "대중교통/접근": "섭지코지 앞까지 차량으로 접근 가능함\n산책로 입구 턱 없음, 휠체어 이동 가능(최고 경사도 15~17도)\n성당건물이 있는 곳까지는 경사로가 가파름"
+    },
+    "relatedSpots": null,
+    "petFriendly": true,
+    "hasBarrierFree": true
+  },
+  "오동도": {
+    "tourapiContentId": "129152",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(2대)_무장애 편의시설",
+      "안내인": "안내요원 있음(주 출입구, 관광안내소)",
+      "큰글씨": "큰활자홍보물 있음",
+      "휠체어": "대여 가능(총 8대/오동도 등대 입구 및 안쪽 각 4대/열차탑승장에 문의)",
+      "음성안내": "음성안내기 있음(스피커)",
+      "이동경로": "버스 2번, 68번, 76번, 333번 탑승",
+      "점자블록": "점자블록 있음(화장실 입구)_시각장애인 편의시설",
+      "엘리베이터": "엘리베이터 있음(전망대)",
+      "장애인화장실": "장애인 화장실 있음(가족형)_무장애 편의시설",
+      "대중교통/접근": "출입구까지 경사로가 설치되어 있음(가파름)_무장애 편의시설"
+    },
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "이순신광장": {
+    "tourapiContentId": "2612869",
+    "petInfo": {
+      "안내": "- 맹견의 경우, 입마개 착용 필수\n- 배변봉투 지참 및 배변처리 필수",
+      "준비물": "목줄 착용",
+      "동반유형": "전구역 동반가능",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(공영주차장)_무장애 편의시설",
+      "출입": "주출입구는 턱이 없어 휠체어 접근 가능함",
+      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함"
+    },
+    "relatedSpots": null,
+    "petFriendly": true,
+    "hasBarrierFree": true
+  },
+  "설악산국립공원": {
+    "tourapiContentId": "125586",
+    "petInfo": null,
+    "barrierFree": {
+      "장애인화장실": "장애인전용화장실 있음",
+      "대중교통/접근": "탐방안내소 주출입구나 전시실 간에 턱이 없어 접근이 편리함"
+    },
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "영금정": {
+    "tourapiContentId": "125779",
+    "petInfo": {
+      "안내": "- 반려견 동반 운영 정책은 사정에 따라 변동 될 수 있음\n- 맹견의 경우, 입마개 착용 필수\n- 배변봉투 지참 및 배변처리 필수",
+      "준비물": "목줄 착용",
+      "동반유형": "전구역 동반가능",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(동명항활어직판장 주차장)_무장애 편의시설",
+      "출입": "주출입구는 턱이 없어 휠체어 접근 가능함",
+      "점자블록": "점자블록 있음(주요시설 앞)_시각장애인 편의시설",
+      "엘리베이터": "엘리베이터 있음(해돋이 정자)",
+      "장애인화장실": "장애인 화장실 있음(주차장입구 앞)",
+      "대중교통/접근": "출입구까지 경사로가 설치되어 있음(완만함)"
+    },
+    "relatedSpots": null,
+    "petFriendly": true,
+    "hasBarrierFree": true
+  },
+  "전주 한옥마을": {
+    "tourapiContentId": "2736325",
+    "petInfo": null,
+    "barrierFree": null,
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": false
+  },
+  "오목대와 이목대": {
+    "tourapiContentId": "126621",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(한옥마을 공영주차장)_무장애 편의시설",
+      "휠체어": "대여 가능(2대/오목대 관광안내소)",
+      "점자블록": "점자블록 있음(주요시설 앞)_시각장애인 편의시설",
+      "장애인화장실": "장애인 화장실 있음(1곳, 남녀 공용)",
+      "대중교통/접근": "출입구까지 경사로가 설치되어 있음(완만함)"
+    },
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "함덕해수욕장": {
+    "tourapiContentId": "126451",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 전용 주차구역 있음_무장애 편의시설",
+      "장애인화장실": "장애인 화장실 있음"
+    },
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "만장굴": {
+    "tourapiContentId": "126452",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 전용 주차구역 주차 대수 : 9대주변 휠체어 이용자 등이 이용할 수 있는 여유공간 있음.관광지 주출입구까지의 거리 : 약 180m",
+      "이동경로": "대중교통 이용가능 : 만장굴[서] 정류장저상버스 없음.",
+      "장애인화장실": "장애인 화장실 있음"
+    },
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "송도센트럴파크": {
+    "tourapiContentId": null,
+    "petInfo": null,
+    "barrierFree": null,
+    "relatedSpots": [
+      {
+        "name": "현대프리미엄아울렛/송도점",
+        "rank": 1,
+        "category": "쇼핑"
+      },
+      {
+        "name": "포레스트아웃팅스/송도점",
+        "rank": 2,
+        "category": "음식"
+      },
+      {
+        "name": "해돋이공원",
+        "rank": 3,
+        "category": "문화관광"
+      },
+      {
+        "name": "월미도",
+        "rank": 4,
+        "category": "자연관광"
+      },
+      {
+        "name": "밥상편지/[한식]",
+        "rank": 5,
+        "category": "음식"
+      },
+      {
+        "name": "트리플스트리트/A동",
+        "rank": 6,
+        "category": "쇼핑"
+      },
+      {
+        "name": "롱비치커피앤브래드",
+        "rank": 7,
+        "category": "음식"
+      },
+      {
+        "name": "송도센트럴파크호텔",
+        "rank": 8,
+        "category": "숙박"
+      }
+    ],
+    "petFriendly": false,
+    "hasBarrierFree": false
+  },
+  "이월드": {
+    "tourapiContentId": "128627",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 주차장 있음_무장애 편의시설",
+      "출입": "주출입구는 턱이 없어 휠체어 접근 가능함",
+      "안내인": "안내요원 있음",
+      "휠체어": "대여가능(신분증 지참)",
+      "점자블록": "점자블록 있음(주요시설 앞)_시각장애인 편의시설",
+      "엘리베이터": "엘리베이터 있음",
+      "장애인화장실": "장애인 화장실 있음",
+      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함"
+    },
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "앞산공원": {
+    "tourapiContentId": null,
+    "petInfo": null,
+    "barrierFree": null,
+    "relatedSpots": [
+      {
+        "name": "수성못",
+        "rank": 1,
+        "category": "자연관광"
+      },
+      {
+        "name": "대덕식당",
+        "rank": 2,
+        "category": "음식"
+      },
+      {
+        "name": "앞산큰골집/본점",
+        "rank": 3,
+        "category": "음식"
+      },
+      {
+        "name": "앞산케이블카",
+        "rank": 4,
+        "category": "기타관광"
+      },
+      {
+        "name": "수성유원지",
+        "rank": 5,
+        "category": "문화관광"
+      },
+      {
+        "name": "양곱화",
+        "rank": 6,
+        "category": "음식"
+      },
+      {
+        "name": "메종로즈",
+        "rank": 7,
+        "category": "음식"
+      },
+      {
+        "name": "달성공원",
+        "rank": 8,
+        "category": "문화관광"
+      }
+    ],
+    "petFriendly": false,
+    "hasBarrierFree": false
+  },
+  "대청호": {
+    "tourapiContentId": "126846",
+    "petInfo": null,
+    "barrierFree": null,
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": false
+  },
+  "무등산국립공원": {
+    "tourapiContentId": "127575",
+    "petInfo": null,
+    "barrierFree": {
+      "휠체어": "대여가능(탐방안내센터)",
+      "장애인화장실": "장애인 화장실 있음(탐방안내센터)",
+      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함"
+    },
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "대포항": {
+    "tourapiContentId": "129596",
+    "petInfo": {
+      "안내": "- 맹견의 경우, 입마개 착용 필수- 배변봉투 지참 및 배변처리 필수",
+      "준비물": "입마개 착용,목줄 착용,기타",
+      "동반유형": "일부구역 동반가능",
+      "비치시설": "화장실, 주차장",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": null,
+    "relatedSpots": [
+      {
+        "name": "속초관광수산시장",
+        "rank": 1,
+        "category": "쇼핑"
+      },
+      {
+        "name": "속초해변",
+        "rank": 2,
+        "category": "자연관광"
+      },
+      {
+        "name": "쏠비치/양양",
+        "rank": 3,
+        "category": "숙박"
+      },
+      {
+        "name": "동명항",
+        "rank": 4,
+        "category": "자연관광"
+      },
+      {
+        "name": "롯데리조트/속초",
+        "rank": 5,
+        "category": "숙박"
+      },
+      {
+        "name": "한화리조트/설악쏘라노",
+        "rank": 6,
+        "category": "숙박"
+      },
+      {
+        "name": "설악케이블카",
+        "rank": 7,
+        "category": "기타관광"
+      },
+      {
+        "name": "낙산사",
+        "rank": 8,
+        "category": "역사관광"
+      }
+    ],
+    "petFriendly": true,
+    "hasBarrierFree": false
+  },
+  "속초관광수산시장": {
+    "tourapiContentId": "1260275",
+    "petInfo": {
+      "안내": "- 시장 내 업소별 동반유무 상이- 맹견의 경우, 입마개 착용 필수- 배변봉투 지참 및 배변처리 필수",
+      "준비물": "목줄 착용",
+      "동반유형": "일부구역 동반가능",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(22대,전통시장 주차장)_무장애 편의시설",
+      "출입": "주 출입구는 턱이 없어 휠체어 접근 가능함",
+      "엘리베이터": "엘리베이터 있음",
+      "장애인화장실": "장애인 화장실 있음(전통시장 주차장)",
+      "대중교통/접근": "출입구까지 경사로가 설치되어 있음(완만함)"
+    },
+    "relatedSpots": null,
+    "petFriendly": true,
+    "hasBarrierFree": true
+  },
+  "광안리해수욕장": {
+    "tourapiContentId": "126078",
+    "petInfo": {
+      "안내": "- 맹견의 경우, 입마개 착용 필수\n- 배변봉투 지참 및 배변처리 필수",
+      "준비물": "목줄 착용",
+      "동반유형": "일부구역 동반가능",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": {
+      "출입": "주출입구는 턱이 없어 휠체어 접근 가능함",
+      "장애인화장실": "장애인 화장실 있음_무장애 편의시설",
+      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함"
+    },
+    "relatedSpots": [
+      {
+        "name": "해운대해수욕장",
+        "rank": 1,
+        "category": "자연관광"
+      },
+      {
+        "name": "송정해수욕장",
+        "rank": 2,
+        "category": "자연관광"
+      },
+      {
+        "name": "신세계백화점/센텀시티점",
+        "rank": 3,
+        "category": "쇼핑"
+      },
+      {
+        "name": "자갈치시장",
+        "rank": 4,
+        "category": "쇼핑"
+      },
+      {
+        "name": "오륙도스카이워크",
+        "rank": 5,
+        "category": "문화관광"
+      },
+      {
+        "name": "신라스테이/해운대",
+        "rank": 6,
+        "category": "숙박"
+      },
+      {
+        "name": "태종대",
+        "rank": 7,
+        "category": "역사관광"
+      },
+      {
+        "name": "해운대달맞이길",
+        "rank": 8,
+        "category": "기타관광"
+      }
+    ],
+    "petFriendly": true,
+    "hasBarrierFree": true
   },
   "해운대해수욕장": {
     "tourapiContentId": "126081",
@@ -278,24 +645,6 @@
     "petFriendly": false,
     "hasBarrierFree": true
   },
-  "섭지코지": {
-    "tourapiContentId": "127813",
-    "petInfo": {
-      "안내": "- 맹견의 경우, 입마개 착용 필수\n- 배변봉투 지참 및 배변처리 필수",
-      "준비물": "목줄 착용",
-      "동반유형": "일부구역 동반가능",
-      "동반가능동물": "전 견종 동반 가능"
-    },
-    "barrierFree": {
-      "주차": "장애인전용주차구역 있음(섭지코지 주차장, 웰컴센터 주차장)_무장애 편의시설",
-      "출입": "단차없이 출입가능, 보행로 구간에 따라 기울기 차이가 다소 있음",
-      "장애인화장실": "장애인용화장실 있음(섭지코지 주차장,웰컴센터 주차장에 위치, 대변기 전면 접근이 가능하나 측면 접근은 불가능함)",
-      "대중교통/접근": "섭지코지 앞까지 차량으로 접근 가능함\n산책로 입구 턱 없음, 휠체어 이동 가능(최고 경사도 15~17도)\n성당건물이 있는 곳까지는 경사로가 가파름"
-    },
-    "relatedSpots": null,
-    "petFriendly": true,
-    "hasBarrierFree": true
-  },
   "동문재래시장": {
     "tourapiContentId": "1013246",
     "petInfo": null,
@@ -367,25 +716,6 @@
       }
     ],
     "petFriendly": true,
-    "hasBarrierFree": true
-  },
-  "오동도": {
-    "tourapiContentId": "129152",
-    "petInfo": null,
-    "barrierFree": {
-      "주차": "장애인 주차장 있음(2대)_무장애 편의시설",
-      "안내인": "안내요원 있음(주 출입구, 관광안내소)",
-      "큰글씨": "큰활자홍보물 있음",
-      "휠체어": "대여 가능(총 8대/오동도 등대 입구 및 안쪽 각 4대/열차탑승장에 문의)",
-      "음성안내": "음성안내기 있음(스피커)",
-      "이동경로": "버스 2번, 68번, 76번, 333번 탑승",
-      "점자블록": "점자블록 있음(화장실 입구)_시각장애인 편의시설",
-      "엘리베이터": "엘리베이터 있음(전망대)",
-      "장애인화장실": "장애인 화장실 있음(가족형)_무장애 편의시설",
-      "대중교통/접근": "출입구까지 경사로가 설치되어 있음(가파름)_무장애 편의시설"
-    },
-    "relatedSpots": null,
-    "petFriendly": false,
     "hasBarrierFree": true
   },
   "안목해변": {
@@ -598,23 +928,6 @@
     "petFriendly": true,
     "hasBarrierFree": true
   },
-  "이순신광장": {
-    "tourapiContentId": "2612869",
-    "petInfo": {
-      "안내": "- 맹견의 경우, 입마개 착용 필수\n- 배변봉투 지참 및 배변처리 필수",
-      "준비물": "목줄 착용",
-      "동반유형": "전구역 동반가능",
-      "동반가능동물": "전 견종 동반 가능"
-    },
-    "barrierFree": {
-      "주차": "장애인 주차장 있음(공영주차장)_무장애 편의시설",
-      "출입": "주출입구는 턱이 없어 휠체어 접근 가능함",
-      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함"
-    },
-    "relatedSpots": null,
-    "petFriendly": true,
-    "hasBarrierFree": true
-  },
   "경포대": {
     "tourapiContentId": "3540838",
     "petInfo": null,
@@ -659,6 +972,669 @@
       },
       {
         "name": "강릉단오제",
+        "rank": 8,
+        "category": "문화관광"
+      }
+    ],
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "경복궁": {
+    "tourapiContentId": "126508",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(광화문 우측 옥외 주차장에 9개)_무장애 편의시설",
+      "출입": "주출입구는 경사로가 있어 휠체어 접근 가능함",
+      "휠체어": "대여가능",
+      "음성안내": "음성안내 가이드 있음(티켓박스에서 음성안내기기와 PDA 대여가능)",
+      "장애인화장실": "장애인 화장실 있음"
+    },
+    "relatedSpots": [
+      {
+        "name": "북촌한옥마을",
+        "rank": 1,
+        "category": "역사관광"
+      },
+      {
+        "name": "청와대",
+        "rank": 2,
+        "category": "기타관광"
+      },
+      {
+        "name": "남산서울타워",
+        "rank": 3,
+        "category": "문화관광"
+      },
+      {
+        "name": "광장시장",
+        "rank": 4,
+        "category": "쇼핑"
+      },
+      {
+        "name": "토속촌삼계탕",
+        "rank": 5,
+        "category": "음식"
+      },
+      {
+        "name": "국립현대미술관/서울관",
+        "rank": 6,
+        "category": "문화관광"
+      },
+      {
+        "name": "팔각정북악스카이",
+        "rank": 7,
+        "category": "문화관광"
+      },
+      {
+        "name": "청와대/정문",
+        "rank": 8,
+        "category": "기타관광"
+      }
+    ],
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "북촌한옥마을": {
+    "tourapiContentId": "126537",
+    "petInfo": {
+      "안내": "- 맹견의 경우, 입마개 착용 필수\n- 배변봉투 지참 및 배변처리 필수",
+      "준비물": "목줄 착용",
+      "동반유형": "일부구역 동반가능",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": {
+      "주차": "장애인 전용 주차구역 있음(창덕궁 주차장,정독도서관)_무장애 편의시설",
+      "안내인": "예약 신청 시 시각장애인해설사 안내가능(청각이용)",
+      "휠체어": "가을동 주민센터에서 휠체어 대여 가능",
+      "수어안내": "예약 신청 시 청각장애인 해설사 안내가능",
+      "장애인화장실": "장애인 전용 화장실 이용 가능함(안국역,정독도서관,가회동 주민센터)",
+      "대중교통/접근": "휠체어 접근 가능"
+    },
+    "relatedSpots": null,
+    "petFriendly": true,
+    "hasBarrierFree": true
+  },
+  "광장시장": {
+    "tourapiContentId": "132183",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(종묘 공영주차장)_무장애 편의시설",
+      "출입": "주출입구는 턱이 없어 휠체어 접근 가능함",
+      "장애인화장실": "장애인 화장실 있음(남1문 광장시장 나들이 쉼터)",
+      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함"
+    },
+    "relatedSpots": [
+      {
+        "name": "경복궁",
+        "rank": 1,
+        "category": "역사관광"
+      },
+      {
+        "name": "북촌한옥마을",
+        "rank": 2,
+        "category": "역사관광"
+      },
+      {
+        "name": "동대문종합시장",
+        "rank": 3,
+        "category": "쇼핑"
+      },
+      {
+        "name": "청와대",
+        "rank": 4,
+        "category": "기타관광"
+      },
+      {
+        "name": "두산타워",
+        "rank": 5,
+        "category": "쇼핑"
+      },
+      {
+        "name": "조계사",
+        "rank": 6,
+        "category": "역사관광"
+      },
+      {
+        "name": "현대시티아울렛/동대문점",
+        "rank": 7,
+        "category": "쇼핑"
+      },
+      {
+        "name": "남산케이블카",
+        "rank": 8,
+        "category": "기타관광"
+      }
+    ],
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "남산서울타워": {
+    "tourapiContentId": "126535",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 주차장 있음_무장애 편의시설(장애인등록 차량의 경우, 남산서울타워 주차장까지 차량이동 가능)",
+      "휠체어": "대여가능(5층)",
+      "엘리베이터": "엘리베이터 있음",
+      "장애인화장실": "장애인 화장실 있음(1층,2층,4층,5층,T5층)",
+      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함"
+    },
+    "relatedSpots": [
+      {
+        "name": "남산케이블카",
+        "rank": 1,
+        "category": "기타관광"
+      },
+      {
+        "name": "원조남산돈까스",
+        "rank": 2,
+        "category": "음식"
+      },
+      {
+        "name": "101번지남산돈까스/본점",
+        "rank": 3,
+        "category": "음식"
+      },
+      {
+        "name": "경복궁",
+        "rank": 4,
+        "category": "역사관광"
+      },
+      {
+        "name": "여의도한강공원",
+        "rank": 5,
+        "category": "문화관광"
+      },
+      {
+        "name": "반포한강공원",
+        "rank": 6,
+        "category": "문화관광"
+      },
+      {
+        "name": "원조남산왕돈까스",
+        "rank": 7,
+        "category": "음식"
+      },
+      {
+        "name": "북촌한옥마을",
+        "rank": 8,
+        "category": "역사관광"
+      }
+    ],
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "월미도": {
+    "tourapiContentId": "127585",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 전용 주차구역 있음(월미도 서문 공영주차장 5대,한국이민사박물관 건물입구 앞 2대),월미파크 공영주차장은 공간은 넉넉하나 일반주차구역이며 월미파크 근처 대형주차장은 공간이 나눠져 있지 않음",
+      "휠체어": "관광안내소에서 휠체어 2대 대여 가능",
+      "장애인화장실": "장애인 전용 화장실 있음(월미도 서문 공중화장실,월미파크 공영주차장 앞)"
+    },
+    "relatedSpots": null,
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "인천대공원": {
+    "tourapiContentId": "128027",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(1주차장에 41칸, 2주차장에 21칸)_무장애 편의시설",
+      "출입": "주출입구는 턱이 없어 휠체어 접근 가능함",
+      "휠체어": "대여가능(50여 대)",
+      "장애인화장실": "장애인 화장실 있음",
+      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함"
+    },
+    "relatedSpots": [
+      {
+        "name": "인천대공원/어린이동물원",
+        "rank": 1,
+        "category": "문화관광"
+      },
+      {
+        "name": "스퀘어원",
+        "rank": 2,
+        "category": "쇼핑"
+      },
+      {
+        "name": "롯데백화점/인천점",
+        "rank": 3,
+        "category": "쇼핑"
+      },
+      {
+        "name": "빌리",
+        "rank": 4,
+        "category": "음식"
+      },
+      {
+        "name": "월미도",
+        "rank": 5,
+        "category": "자연관광"
+      },
+      {
+        "name": "장수가든",
+        "rank": 6,
+        "category": "음식"
+      },
+      {
+        "name": "모래내시장",
+        "rank": 7,
+        "category": "쇼핑"
+      },
+      {
+        "name": "들밥차반/만수점 [한식]",
+        "rank": 8,
+        "category": "음식"
+      }
+    ],
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "소래포구": {
+    "tourapiContentId": "2020690",
+    "petInfo": {
+      "안내": "- 실내시설은 동반 불가- 맹견의 경우, 입마개 착용 필수- 배변봉투 지참 및 배변처리 필수",
+      "준비물": "목줄 착용",
+      "동반유형": "일부구역 동반가능",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": {
+      "주차": "장애인 주차장 있음_무장애 편의시설",
+      "출입": "주출입구는 턱이 없어 휠체어 접근 가능함",
+      "엘리베이터": "엘리베이터 있음",
+      "장애인화장실": "장애인 화장실 있음",
+      "대중교통/접근": "출입구까지 턱이 없어 휠체어 접근 가능함"
+    },
+    "relatedSpots": [
+      {
+        "name": "소래포구종합어시장",
+        "rank": 1,
+        "category": "쇼핑"
+      },
+      {
+        "name": "남촌농산물도매시장",
+        "rank": 2,
+        "category": "쇼핑"
+      },
+      {
+        "name": "연안부두",
+        "rank": 3,
+        "category": "자연관광"
+      },
+      {
+        "name": "인천종합어시장",
+        "rank": 4,
+        "category": "쇼핑"
+      },
+      {
+        "name": "인천국제공항/제1여객터미널",
+        "rank": 5,
+        "category": "기타관광"
+      },
+      {
+        "name": "영종도구읍뱃터관광어시장",
+        "rank": 6,
+        "category": "쇼핑"
+      },
+      {
+        "name": "라마다인천호텔",
+        "rank": 7,
+        "category": "숙박"
+      },
+      {
+        "name": "모래내시장",
+        "rank": 8,
+        "category": "쇼핑"
+      }
+    ],
+    "petFriendly": true,
+    "hasBarrierFree": true
+  },
+  "사직공원전망타워": {
+    "tourapiContentId": "2752383",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 전용 주차구역 있음(사직공원전망타워 입구 앞 1대)"
+    },
+    "relatedSpots": [
+      {
+        "name": "펭귄마을",
+        "rank": 1,
+        "category": "기타관광"
+      },
+      {
+        "name": "CS호텔",
+        "rank": 2,
+        "category": "숙박"
+      },
+      {
+        "name": "국립아시아문화전당",
+        "rank": 3,
+        "category": "문화관광"
+      },
+      {
+        "name": "신세계백화점/광주점신관",
+        "rank": 4,
+        "category": "쇼핑"
+      },
+      {
+        "name": "온고당",
+        "rank": 5,
+        "category": "음식"
+      },
+      {
+        "name": "5.18민주화운동기록관",
+        "rank": 6,
+        "category": "문화관광"
+      },
+      {
+        "name": "유스퀘어문화관",
+        "rank": 7,
+        "category": "문화관광"
+      },
+      {
+        "name": "양동통닭",
+        "rank": 8,
+        "category": "음식"
+      }
+    ],
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "김광석다시그리기길": {
+    "tourapiContentId": "1871383",
+    "petInfo": {
+      "안내": "- 맹견의 경우, 입마개 착용 필수\n- 배변봉투 지참 및 배변처리 필수",
+      "준비물": "목줄 착용",
+      "동반유형": "전구역 동반가능",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(대봉1동 주민센터)_무장애 편의시설",
+      "엘리베이터": "엘리베이터 있음(주차장)",
+      "장애인화장실": "장애인 화장실 있음 (김광석 다시 그리기 길 벽화 뒤쪽 신천대로변 공원 개방형 화장실-남녀구분, '속닥속닥 수다방' 장애인 화장실은 내부가 좁아 이용하기 불편함)",
+      "대중교통/접근": "출입구까지 경사로가 설치되어 있음<br />\n방천시장을 통과해 접근하면 경사 없이  평탄함"
+    },
+    "relatedSpots": [
+      {
+        "name": "서문시장",
+        "rank": 1,
+        "category": "쇼핑"
+      },
+      {
+        "name": "서문시장2지구종합상가",
+        "rank": 2,
+        "category": "쇼핑"
+      },
+      {
+        "name": "더현대/대구",
+        "rank": 3,
+        "category": "쇼핑"
+      },
+      {
+        "name": "방천가족족발",
+        "rank": 4,
+        "category": "음식"
+      },
+      {
+        "name": "신세계백화점/대구점",
+        "rank": 5,
+        "category": "쇼핑"
+      },
+      {
+        "name": "수성못",
+        "rank": 6,
+        "category": "자연관광"
+      },
+      {
+        "name": "달성공원",
+        "rank": 7,
+        "category": "문화관광"
+      },
+      {
+        "name": "팔공산케이블카",
+        "rank": 8,
+        "category": "기타관광"
+      }
+    ],
+    "petFriendly": true,
+    "hasBarrierFree": true
+  },
+  "서문시장": {
+    "tourapiContentId": null,
+    "petInfo": null,
+    "barrierFree": null,
+    "relatedSpots": [
+      {
+        "name": "신세계백화점/대구점",
+        "rank": 1,
+        "category": "쇼핑"
+      },
+      {
+        "name": "더현대/대구",
+        "rank": 2,
+        "category": "쇼핑"
+      },
+      {
+        "name": "서문시장2지구종합상가",
+        "rank": 3,
+        "category": "쇼핑"
+      },
+      {
+        "name": "김광석다시그리기길",
+        "rank": 4,
+        "category": "문화관광"
+      },
+      {
+        "name": "달성공원",
+        "rank": 5,
+        "category": "문화관광"
+      },
+      {
+        "name": "롯데백화점/대구점",
+        "rank": 6,
+        "category": "쇼핑"
+      },
+      {
+        "name": "현대시티아울렛/대구점",
+        "rank": 7,
+        "category": "쇼핑"
+      },
+      {
+        "name": "이월드",
+        "rank": 8,
+        "category": "문화관광"
+      }
+    ],
+    "petFriendly": false,
+    "hasBarrierFree": false
+  },
+  "수성못": {
+    "tourapiContentId": "1115613",
+    "petInfo": {
+      "안내": "- 맹견의 경우, 입마개 착용 필수\n- 배변봉투 지참 및 배변처리 필수",
+      "준비물": "목줄 착용",
+      "동반유형": "일부구역 동반가능",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": {
+      "주차": "장애인 주차장 있음(3대,두산동 행정복지센터)_무장애 편의시설",
+      "출입": "주 출입구는 턱이 없어 휠체어 접근 가능함",
+      "점자블록": "점자블록 있음(주요시설 앞)_시각장애인 편의시설",
+      "엘리베이터": "엘리베이터 있음(수성못역 출구)",
+      "장애인화장실": "장애인 화장실 있음",
+      "대중교통/접근": "출입구까지 경사로가 설치되어 있음(완만함)"
+    },
+    "relatedSpots": null,
+    "petFriendly": true,
+    "hasBarrierFree": true
+  },
+  "한밭수목원": {
+    "tourapiContentId": "741658",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 주차장 있음_무장애 편의시설",
+      "출입": "주출입구는 턱이 없어 휠체어 접근 가능함",
+      "휠체어": "대여가능",
+      "엘리베이터": "엘리베이터 있음(연구관리동)",
+      "장애인화장실": "장애인 화장실 있음(연구관리동)",
+      "대중교통/접근": "출입구까지 평지로 되어 있으나 흙(돌) 구간 있음"
+    },
+    "relatedSpots": [
+      {
+        "name": "성심당/DCC점",
+        "rank": 1,
+        "category": "음식"
+      },
+      {
+        "name": "신세계백화점/대전신세계Art&Science",
+        "rank": 2,
+        "category": "쇼핑"
+      },
+      {
+        "name": "엑스포과학공원",
+        "rank": 3,
+        "category": "문화관광"
+      },
+      {
+        "name": "베스타프리미엄뷔페",
+        "rank": 4,
+        "category": "음식"
+      },
+      {
+        "name": "현대프리미엄아울렛/대전점",
+        "rank": 5,
+        "category": "쇼핑"
+      },
+      {
+        "name": "성심당/롯데백화점대전점",
+        "rank": 6,
+        "category": "음식"
+      },
+      {
+        "name": "롯데백화점/대전점",
+        "rank": 7,
+        "category": "쇼핑"
+      },
+      {
+        "name": "태평소국밥/본관",
+        "rank": 8,
+        "category": "음식"
+      }
+    ],
+    "petFriendly": false,
+    "hasBarrierFree": true
+  },
+  "장태산자연휴양림": {
+    "tourapiContentId": "129438",
+    "petInfo": {
+      "안내": "- 맹견의 경우, 입마개 착용 필수- 숙박시설, 출렁다리, 스카이 타워는 동반 불가- 배변 봉투 지참 및 배변 처리 필수",
+      "준비물": "자유이용",
+      "동반유형": "일부구역 동반가능",
+      "동반가능동물": "전 견종 동반 가능"
+    },
+    "barrierFree": {
+      "주차": "장애인 전용 주차구역 있음(휴양관주차장에  3면, 2주차장에 2면, 5주차장에 5면)_무장애 편의시설",
+      "출입": "무장애 공간이 있으며 무장애 목재 데크가 있는 구간에는 연속손잡이가 설치되어 있음",
+      "장애인화장실": "장애인 화장실있음"
+    },
+    "relatedSpots": [
+      {
+        "name": "성심당/본점",
+        "rank": 1,
+        "category": "음식"
+      },
+      {
+        "name": "성심당/DCC점",
+        "rank": 2,
+        "category": "음식"
+      },
+      {
+        "name": "투드커피",
+        "rank": 3,
+        "category": "음식"
+      },
+      {
+        "name": "한밭수목원",
+        "rank": 4,
+        "category": "자연관광"
+      },
+      {
+        "name": "만인산자연휴양림",
+        "rank": 5,
+        "category": "자연관광"
+      },
+      {
+        "name": "신세계백화점/대전신세계Art&Science",
+        "rank": 6,
+        "category": "쇼핑"
+      },
+      {
+        "name": "상소동산림욕장",
+        "rank": 7,
+        "category": "자연관광"
+      },
+      {
+        "name": "대전중앙시장",
+        "rank": 8,
+        "category": "쇼핑"
+      }
+    ],
+    "petFriendly": true,
+    "hasBarrierFree": true
+  },
+  "국립아시아문화전당": {
+    "tourapiContentId": "2009775",
+    "petInfo": null,
+    "barrierFree": {
+      "주차": "장애인 전용 주차구역 있음(17대)\n- 주차장A : 지하1층(4면), 지하2층(5면), 지하3층(2면)\n- 주차장B : 지하3층(3면), 지하4층(3면)",
+      "출입": "출입구에 휠체어가 통과 가능(자동문)",
+      "안내인": "안내요원 있음(방문자센터), 시설별 안내데스크 운영",
+      "휠체어": "대여가능",
+      "음성안내": "음성안내기 있음(콘텐츠별로 상이) * 확인사항",
+      "점자블록": "시설별 점자블록 있음 (시각장애인 편의시설 * 확인사항)",
+      "엘리베이터": "엘리베이터 있음",
+      "장애인화장실": "장애인 화장실 있음",
+      "대중교통/접근": "출입구까지 경사로가 설치되어 있음"
+    },
+    "relatedSpots": [
+      {
+        "name": "롯데백화점/광주점",
+        "rank": 1,
+        "category": "쇼핑"
+      },
+      {
+        "name": "신세계백화점/광주점",
+        "rank": 2,
+        "category": "쇼핑"
+      },
+      {
+        "name": "NC웨이브/충장점",
+        "rank": 3,
+        "category": "쇼핑"
+      },
+      {
+        "name": "펭귄마을",
+        "rank": 4,
+        "category": "기타관광"
+      },
+      {
+        "name": "광주시립미술관",
+        "rank": 5,
+        "category": "문화관광"
+      },
+      {
+        "name": "대성콩물/중흥본점",
+        "rank": 6,
+        "category": "음식"
+      },
+      {
+        "name": "NC백화점/광주역점",
+        "rank": 7,
+        "category": "쇼핑"
+      },
+      {
+        "name": "김대중컨벤션센터",
         "rank": 8,
         "category": "문화관광"
       }
