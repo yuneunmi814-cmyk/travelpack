@@ -53,11 +53,12 @@ export function Loading() {
   return <View style={styles.center}><ActivityIndicator color={colors.primary} /></View>
 }
 
-export function EmptyState({ text, onRetry }: { text: string; onRetry?: () => void }) {
+export function EmptyState({ text, onRetry, action }: { text: string; onRetry?: () => void; action?: { label: string; onPress: () => void } }) {
   return (
     <View style={styles.center}>
-      <Text style={{ color: colors.textHint, textAlign: 'center', marginBottom: onRetry ? 12 : 0 }}>{text}</Text>
+      <Text style={{ color: colors.textHint, textAlign: 'center', marginBottom: onRetry || action ? 14 : 0 }}>{text}</Text>
       {onRetry && <Button title="다시 시도" onPress={onRetry} kind="navy" />}
+      {action && <Button title={action.label} onPress={action.onPress} style={{ paddingHorizontal: 28 }} />}
     </View>
   )
 }

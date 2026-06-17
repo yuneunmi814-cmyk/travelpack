@@ -21,8 +21,8 @@ try {
       if (force && existing > 0) console.warn(`[seed-prod] ⚠️ SEED_FORCE=true — 기존 데이터(지역 ${existing}곳)를 삭제하고 재시드합니다`)
       const password = process.env.SEED_ADMIN_PASSWORD ?? 'travelpack-dev-1234'
       const result = await runSeed(prisma, password, 10, { regions: true })
-      const [spots, courses] = await Promise.all([prisma.spot.count(), prisma.course.count()])
-      console.log(`[seed-prod] 초기 시드 완료 — 지역 6곳 / 스팟 ${spots} / 코스 ${courses}`)
+      const [regions, spots, courses] = await Promise.all([prisma.region.count(), prisma.spot.count(), prisma.course.count()])
+      console.log(`[seed-prod] 초기 시드 완료 — 지역 ${regions}곳 / 스팟 ${spots} / 코스 ${courses}`)
       console.log(`[seed-prod] 발행 코스 #${result.publishedCourseId} · 관리자 super@/editor@/reviewer@travelpack.app`)
     }
   }

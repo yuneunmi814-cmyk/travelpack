@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { Alert, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useResource } from '../api/useResource'
 import { api, ApiError } from '../api/client'
 import { useAuth } from '../auth/AuthContext'
 import { Button, Card, ImagePlaceholder, Loading, EmptyState, Pill, Badge } from '../components/ui'
+import { HeroSlideshow } from '../components/HeroSlideshow'
 import { MapView } from '../components/MapView'
 import { BookmarkButton } from '../components/BookmarkButton'
 import { colors, space } from '../theme'
@@ -83,11 +84,13 @@ export function CourseDetailScreen({ navigation, route }: Props) {
 
   const allSpots = data.days.flatMap((d) => d.items.map((it) => it.spot))
   const mapSpots = allSpots.filter((s) => typeof s.lat === 'number' && typeof s.lng === 'number')
+  // 히어로 슬라이드쇼 사진: 코스 커버 + 각 관광지 대표사진(중복 제거)
+  const heroImages = [...new Set([data.cover, ...allSpots.map((s) => s.thumbnail)].filter((u): u is string => Boolean(u)))]
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.bg }}>
       <ScrollView contentContainerStyle={{ paddingBottom: space(6) }}>
-        {data.cover ? <Image source={{ uri: data.cover }} style={{ height: 200, width: '100%' }} /> : <ImagePlaceholder height={160} />}
+        {heroImages.length > 0 ? <HeroSlideshow key={data.id} images={heroImages} height={200} /> : <ImagePlaceholder height={160} />}
         <View style={{ padding: space(5), gap: space(3) }}>
           <Text style={styles.title}>{data.title}</Text>
           {data.summary && <Text style={{ color: colors.textSub }}>{data.summary}</Text>}

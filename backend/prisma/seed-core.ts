@@ -84,7 +84,7 @@ export async function runSeed(prisma: PrismaClient, adminPassword: string, round
     prisma.adminUser.create({ data: { email: 'reviewer@travelpack.app', passwordHash, name: '콘텐츠 검수자', role: 'CONTENT_MANAGER' } }),
   ])
 
-  const jeju = await prisma.region.create({ data: { name: '제주', slug: 'jeju', sortOrder: 1 } })
+  const jeju = await prisma.region.create({ data: { name: '제주', slug: 'jeju', sortOrder: 1, thumbnailUrl: SPOT_IMAGES['성산일출봉'] } })
   await prisma.region.createMany({
     data: [
       { name: '부산', slug: 'busan', sortOrder: 2 },
@@ -302,6 +302,30 @@ export async function runSeed(prisma: PrismaClient, adminPassword: string, round
           items: { create: items },
         },
       })
+    }
+  }
+
+  // 지역 썸네일 백필 — 탐색/홈 지역 카드 이미지. 대표 코스 커버 → 없으면 지역 스팟 이미지 순.
+  // (jeju는 생성 시 이미 설정됨) 전체 시드에서만 전국 지역 이미지를 채운다.
+  if (opts.regions) {
+    const regs = await prisma.region.findMany({ select: { id: true, thumbnailUrl: true } })
+    for (const r of regs) {
+      if (r.thumbnailUrl) continue
+      const course = await prisma.course.findFirst({
+        where: { regionId: r.id, coverImageUrl: { not: null } },
+        orderBy: { saveCount: 'desc' },
+        select: { coverImageUrl: true },
+      })
+      let url = course?.coverImageUrl ?? null
+      if (!url) {
+        const img = await prisma.spotImage.findFirst({
+          where: { spot: { regionId: r.id } },
+          orderBy: { id: 'asc' },
+          select: { url: true },
+        })
+        url = img?.url ?? null
+      }
+      if (url) await prisma.region.update({ where: { id: r.id }, data: { thumbnailUrl: url } })
     }
   }
 

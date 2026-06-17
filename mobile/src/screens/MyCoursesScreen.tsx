@@ -34,7 +34,7 @@ export function MyCoursesScreen({ navigation }: Props) {
       ) : error ? (
         <EmptyState text={error} />
       ) : !data || data.items.length === 0 ? (
-        <EmptyState text="아직 만든 여행팩이 없어요.\n나만의 코스를 만들어 공개해 보세요!" />
+        <EmptyState text={'아직 만든 여행팩이 없어요.\n나만의 코스를 만들어 공개해 보세요!'} />
       ) : (
         <FlatList
           contentContainerStyle={{ padding: space(4), paddingTop: 0, gap: space(3) }}

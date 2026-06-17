@@ -19,10 +19,19 @@ export function TripsScreen({ navigation }: Props) {
 
   useFocusEffect(useCallback(() => { if (isAuthed) reload() }, [isAuthed, reload]))
 
+  // 다른 탭(홈)으로 이동 — 코스를 골라 "이 코스로 여행 시작"하면 내 여행에 추가된다
+  const goExplore = () => (navigation.getParent() as { navigate: (n: string) => void } | undefined)?.navigate('HomeTab')
+
   if (!isAuthed) return <EmptyState text="로그인하면 내 여행을 볼 수 있어요" />
   if (loading) return <Loading />
   if (error || !data) return <EmptyState text={error ?? '불러오기 실패'} />
-  if (data.items.length === 0) return <EmptyState text="아직 여행이 없어요" />
+  if (data.items.length === 0)
+    return (
+      <EmptyState
+        text={'아직 시작한 여행이 없어요.\n마음에 드는 코스로 여행을 시작해 보세요!'}
+        action={{ label: '추천 코스 둘러보기', onPress: goExplore }}
+      />
+    )
 
   return (
     <FlatList
