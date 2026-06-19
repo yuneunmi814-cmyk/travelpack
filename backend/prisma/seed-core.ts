@@ -15,6 +15,13 @@ interface KtoSeed {
 }
 const KTO_SEED: KtoSeed = JSON.parse(readFileSync(new URL('./seed-courses.json', import.meta.url), 'utf8'))
 
+// 유튜브 여행영상(sync:youtube 결과) — 지역별 영상 + buzzScore를 시드에 구워둠(라이브 API 없이 재현)
+interface VideoSeed {
+  buzz: Record<string, number>
+  videos: { youtubeId: string; regionSlug: string; title: string; channelTitle: string | null; thumbnailUrl: string | null; viewCount: string; publishedAt: string | null; durationSec: number | null; sortOrder: number }[]
+}
+const VIDEO_SEED: VideoSeed = JSON.parse(readFileSync(new URL('./seed-videos.json', import.meta.url), 'utf8'))
+
 // KTO 코스 제목/요약 키워드로 테마(8종 중 1~2개) 추론 — 홈 테마섹션·추천 노출용
 function inferKtoThemes(text: string): string[] {
   const picks: string[] = []
@@ -78,6 +85,7 @@ export async function runSeed(prisma: PrismaClient, adminPassword: string, round
     prisma.courseItem.deleteMany(),
     prisma.courseTheme.deleteMany(),
     prisma.course.deleteMany(),
+    prisma.video.deleteMany(),
     prisma.spotImage.deleteMany(),
     prisma.spot.deleteMany(),
     prisma.banner.deleteMany(),
@@ -321,6 +329,27 @@ export async function runSeed(prisma: PrismaClient, adminPassword: string, round
           coverImageUrl: cover, saveCount: 250 + items.length * 30,
           ...(themePicks.length ? { themes: { create: themePicks.map((themeId) => ({ themeId })) } } : {}),
           items: { create: items },
+        },
+      })
+    }
+  }
+
+  // 유튜브 여행영상(seed-videos.json) — 지역별 영상 + buzzScore. 전체 시드에서만 적재.
+  if (opts.regions) {
+    const vidRegions = await prisma.region.findMany({ select: { id: true, slug: true } })
+    const vridBySlug = new Map(vidRegions.map((r) => [r.slug, r.id]))
+    for (const [slug, buzz] of Object.entries(VIDEO_SEED.buzz)) {
+      const rid = vridBySlug.get(slug)
+      if (rid) await prisma.region.update({ where: { id: rid }, data: { buzzScore: buzz } })
+    }
+    for (const v of VIDEO_SEED.videos) {
+      const rid = vridBySlug.get(v.regionSlug)
+      if (!rid) continue
+      await prisma.video.create({
+        data: {
+          youtubeId: v.youtubeId, regionId: rid, title: v.title, channelTitle: v.channelTitle,
+          thumbnailUrl: v.thumbnailUrl, viewCount: BigInt(v.viewCount),
+          publishedAt: v.publishedAt ? new Date(v.publishedAt) : null, durationSec: v.durationSec, sortOrder: v.sortOrder,
         },
       })
     }

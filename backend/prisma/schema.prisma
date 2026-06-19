@@ -179,9 +179,12 @@ model Region {
   isActive     Boolean @default(true) @map("is_active")
   /// 관광 빅데이터(지역별 방문자수) 기반 인기 점수 — 최근 외지인+외국인 합. 인기 정렬·배지용
   visitorScore Int     @default(0) @map("visitor_score")
+  /// 유튜브 여행영상 화제도(상위 영상 조회수 기반) — '요즘 뜨는 곳' 추천 랭킹용
+  buzzScore    Int     @default(0) @map("buzz_score")
 
   spots   Spot[]
   courses Course[]
+  videos  Video[]
 
   @@map("regions")
 }
@@ -231,6 +234,7 @@ model Spot {
   courseItems  CourseItem[]
   audioGuides  AudioGuide[]
   translations SpotTranslation[]
+  videos       Video[]
 
   @@index([regionId, status])
   @@map("spots")
@@ -292,6 +296,30 @@ model SpotImage {
 
   @@unique([spotId, sourceId])
   @@map("spot_images")
+}
+
+/// 유튜브 여행영상(쇼츠 등 짧은 영상) — YouTube Data API v3로 수집. 지역(필수)·스팟(선택) 연결.
+/// 홈 '여행 쇼츠' 피드·코스/스팟 상세 임베드·지역 화제도(buzzScore) 산출에 사용.
+model Video {
+  id           BigInt    @id @default(autoincrement())
+  youtubeId    String    @unique @map("youtube_id")
+  title        String
+  channelTitle String?   @map("channel_title")
+  thumbnailUrl String?   @map("thumbnail_url")
+  viewCount    BigInt    @default(0) @map("view_count")
+  publishedAt  DateTime? @map("published_at")
+  durationSec  Int?      @map("duration_sec")
+  regionId     BigInt?   @map("region_id")
+  spotId       BigInt?   @map("spot_id")
+  sortOrder    Int       @default(0) @map("sort_order")  // 지역 내 노출 순서(조회수 desc)
+  createdAt    DateTime  @default(now()) @map("created_at")
+
+  region Region? @relation(fields: [regionId], references: [id], onDelete: Cascade)
+  spot   Spot?   @relation(fields: [spotId], references: [id], onDelete: Cascade)
+
+  @@index([regionId, sortOrder])
+  @@index([spotId, sortOrder])
+  @@map("videos")
 }
 
 model Course {

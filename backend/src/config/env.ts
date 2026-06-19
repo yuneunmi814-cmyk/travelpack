@@ -15,6 +15,8 @@ const schema = z.object({
   GOOGLE_CLIENT_ID: z.string().optional().or(z.literal('')),
   KAKAO_ENABLED: z.coerce.boolean().default(true),
   TOURAPI_SERVICE_KEY: z.string().optional().or(z.literal('')),
+  // YouTube Data API v3 (여행영상 큐레이션 sync) — 비우면 sync:youtube 스킵
+  YOUTUBE_API_KEY: z.string().optional().or(z.literal('')),
   RATE_LIMIT_GUEST_PER_MIN: z.coerce.number().default(30),
   RATE_LIMIT_USER_PER_MIN: z.coerce.number().default(60),
   // S3 업로드 (비우면 /uploads/presigned-url 503)

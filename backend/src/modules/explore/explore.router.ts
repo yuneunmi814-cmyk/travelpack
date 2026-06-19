@@ -35,13 +35,22 @@ function toCourseCard(c: CourseForList) {
   }
 }
 
+// 유튜브 여행영상 카드 (코스/스팟 상세 임베드용)
+const videoSelect = {
+  id: true, youtubeId: true, title: true, channelTitle: true, thumbnailUrl: true, viewCount: true, durationSec: true,
+} satisfies Prisma.VideoSelect
+type VideoForCard = Prisma.VideoGetPayload<{ select: typeof videoSelect }>
+function toVideoCard(v: VideoForCard) {
+  return { id: v.id, youtubeId: v.youtubeId, title: v.title, channel: v.channelTitle, thumbnail: v.thumbnailUrl, viewCount: v.viewCount, durationSec: v.durationSec }
+}
+
 exploreRouter.get(
   '/home',
   optionalUser,
   h(async (req, res) => {
     const build = async (userId: bigint | null) => {
       const now = new Date()
-      const [banners, recommended, regions] = await Promise.all([
+      const [banners, recommended, regions, shorts] = await Promise.all([
         prisma.banner.findMany({
           where: { isActive: true, startAt: { lte: now }, endAt: { gte: now } },
           orderBy: { sortOrder: 'asc' },
@@ -56,7 +65,14 @@ exploreRouter.get(
         prisma.region.findMany({
           where: { isActive: true },
           orderBy: { sortOrder: 'asc' },
-          select: { id: true, name: true, thumbnailUrl: true, visitorScore: true, _count: { select: { courses: { where: { status: 'PUBLISHED' } } } } },
+          select: { id: true, name: true, thumbnailUrl: true, visitorScore: true, buzzScore: true, _count: { select: { courses: { where: { status: 'PUBLISHED' } } } } },
+        }),
+        // 홈 '여행 쇼츠' 피드 — 전국 조회수 상위 영상
+        prisma.video.findMany({
+          where: { regionId: { not: null } },
+          orderBy: { viewCount: 'desc' },
+          take: 12,
+          select: { ...videoSelect, region: { select: { name: true } } },
         }),
       ])
 
@@ -86,11 +102,22 @@ exploreRouter.get(
       return {
         banners,
         recommendedCourses: recommended.map(toCourseCard),
-        popularRegions: regions
+        popularRegions: [...regions]
           // 인기 정렬: 방문자 빅데이터 점수 우선, 동률이면 코스 보유 수
           .sort((a, b) => b.visitorScore - a.visitorScore || b._count.courses - a._count.courses)
           .slice(0, 8)
           .map((r, i) => ({ id: r.id, name: r.name, thumbnail: r.thumbnailUrl, courseCount: r._count.courses, visitorScore: r.visitorScore, trending: i < 3 && r.visitorScore > 0 })),
+        // 유튜브 화제도 기반 '요즘 뜨는 여행지' (추천 랭킹 신호)
+        trendingRegions: [...regions]
+          .filter((r) => r.buzzScore > 0)
+          .sort((a, b) => b.buzzScore - a.buzzScore)
+          .slice(0, 6)
+          .map((r) => ({ id: r.id, name: r.name, thumbnail: r.thumbnailUrl, buzzScore: r.buzzScore })),
+        // 홈 '여행 쇼츠' 피드
+        shortsFeed: shorts.map((v) => ({
+          id: v.id, youtubeId: v.youtubeId, title: v.title, channel: v.channelTitle,
+          thumbnail: v.thumbnailUrl, viewCount: v.viewCount, durationSec: v.durationSec, region: v.region?.name ?? null,
+        })),
         themeSections,
       }
     }
@@ -216,12 +243,14 @@ exploreRouter.get(
 
     prisma.course.update({ where: { id }, data: { viewCount: { increment: 1 } } }).catch(() => {})
 
-    const [agg, bookmark, entitlement] = await Promise.all([
+    const [agg, bookmark, entitlement, videos] = await Promise.all([
       prisma.review.aggregate({ where: { targetType: 'COURSE', targetId: id, status: 'VISIBLE' }, _avg: { rating: true }, _count: true }),
       req.userId
         ? prisma.bookmark.findUnique({ where: { userId_targetType_targetId: { userId: req.userId, targetType: 'COURSE', targetId: id } } })
         : null,
       courseEntitlement(course, req.userId ?? null),
+      // 이 코스 지역의 여행영상(쇼츠)
+      prisma.video.findMany({ where: { regionId: course.regionId }, orderBy: { sortOrder: 'asc' }, take: 6, select: videoSelect }),
     ])
 
     const allDays = [...new Set(course.items.map((i) => i.dayNo))].sort((a, b) => a - b).map((dayNo) => ({
@@ -277,6 +306,7 @@ exploreRouter.get(
       days,
       reviewSummary: { avg: agg._avg.rating ? Number(agg._avg.rating.toFixed(1)) : null, count: agg._count },
       isBookmarked: req.userId ? Boolean(bookmark) : null,
+      videos: videos.map(toVideoCard),
     })
   }),
 )
@@ -293,7 +323,7 @@ exploreRouter.get(
     if (!spot) throw Errors.notFound('관광지')
 
     const lang = typeof req.query.lang === 'string' ? req.query.lang : 'ko'
-    const [agg, nearby, bookmark, audioGuides, translation] = await Promise.all([
+    const [agg, nearby, bookmark, audioGuides, translation, videos] = await Promise.all([
       prisma.review.aggregate({ where: { targetType: 'SPOT', targetId: id, status: 'VISIBLE' }, _avg: { rating: true }, _count: true }),
       nearbySpots(id),
       req.userId
@@ -307,6 +337,8 @@ exploreRouter.get(
       }),
       // 다국어 번역(영문 등) — lang이 ko가 아니면 적용
       lang !== 'ko' ? prisma.spotTranslation.findUnique({ where: { spotId_langCode: { spotId: id, langCode: lang } } }) : null,
+      // 이 스팟 지역의 여행영상(쇼츠)
+      prisma.video.findMany({ where: { regionId: spot.regionId }, orderBy: { sortOrder: 'asc' }, take: 6, select: videoSelect }),
     ])
     const { open, today } = todayOpenStatus(spot.openHours)
 
@@ -340,6 +372,8 @@ exploreRouter.get(
       petInfo: spot.petInfo ?? null,
       barrierFree: spot.barrierFree ?? null,
       relatedSpots: (spot.relatedSpots as unknown[] | null) ?? [],
+      // 유튜브 여행영상(이 지역 쇼츠)
+      videos: videos.map(toVideoCard),
     })
   }),
 )
