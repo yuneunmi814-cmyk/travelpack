@@ -5,6 +5,7 @@ import { useResource } from '../api/useResource'
 import { Card, ImagePlaceholder, Loading, EmptyState, Badge } from '../components/ui'
 import { BookmarkButton } from '../components/BookmarkButton'
 import { AudioGuideList } from '../components/AudioGuideList'
+import { VideoRail } from '../components/VideoRail'
 import { colors, space } from '../theme'
 import type { ExploreStackParams } from '../navigation/types'
 import type { SpotDetail } from '../api/types'
@@ -76,6 +77,8 @@ export function SpotDetailScreen({ navigation, route }: Props) {
         )}
 
         <AudioGuideList guides={data.audioGuides} />
+
+        {data.videos?.length > 0 && <VideoRail title="🎬 여행 영상" videos={data.videos} />}
 
         {data.petInfo && <InfoSection title="🐾 반려동물 동반여행" data={data.petInfo} />}
         {data.barrierFree && <InfoSection title="♿ 무장애 여행 정보" data={data.barrierFree} />}

@@ -5,6 +5,19 @@ export type VisitStatus = 'PENDING' | 'DONE' | 'SKIPPED'
 export interface Region { id: string; name: string; slug: string; thumbnailUrl?: string | null; courseCount?: number; visitorScore?: number; trending?: boolean }
 export interface Theme { id: string; name: string; icon?: string | null }
 
+// 유튜브 여행영상(쇼츠) — 홈 피드·코스/스팟 임베드
+export interface VideoCard {
+  id: string
+  youtubeId: string
+  title: string
+  channel: string | null
+  thumbnail: string | null
+  viewCount: string | number // BigInt 직렬화로 문자열로 올 수 있음
+  durationSec: number | null
+  region?: string | null
+}
+export interface TrendingRegion { id: string; name: string; thumbnail?: string | null; buzzScore: number }
+
 export interface CourseCard {
   id: string
   title: string
@@ -24,6 +37,8 @@ export interface HomeFeed {
   banners: Banner[]
   recommendedCourses: CourseCard[]
   popularRegions: Region[]
+  trendingRegions: TrendingRegion[]
+  shortsFeed: VideoCard[]
   themeSections: { theme: { id: string; name: string }; courses: CourseCard[] }[]
 }
 
@@ -72,6 +87,7 @@ export interface CourseDetail {
   days: CourseDay[]
   reviewSummary: { avg: number | null; count: number }
   isBookmarked: boolean | null
+  videos: VideoCard[]
 }
 
 // 마켓플레이스 카드(사용자 작성 코스)
@@ -172,6 +188,8 @@ export interface SpotDetail {
   petInfo: Record<string, string> | null
   barrierFree: Record<string, string> | null
   relatedSpots: { name: string; category?: string; rank?: number }[]
+  // 유튜브 여행영상(이 지역 쇼츠)
+  videos: VideoCard[]
 }
 
 export interface TripVisit {

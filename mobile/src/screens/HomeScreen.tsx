@@ -2,6 +2,7 @@ import { ScrollView, Text, View, Pressable, StyleSheet, Image } from 'react-nati
 import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import { useResource } from '../api/useResource'
 import { Card, ImagePlaceholder, Loading, EmptyState, Pill, Badge } from '../components/ui'
+import { VideoRail } from '../components/VideoRail'
 import { colors, space } from '../theme'
 import type { TabParams } from '../navigation/types'
 import type { CourseCard, HomeFeed, MarketCard, Paged, Region } from '../api/types'
@@ -16,7 +17,7 @@ export function HomeScreen({ navigation }: Props) {
   function openCourse(courseId: string) {
     navigation.navigate('ExploreTab', { screen: 'CourseDetail', params: { courseId } })
   }
-  function openRegion(r: Region) {
+  function openRegion(r: { id: string; name: string }) {
     navigation.navigate('ExploreTab', { screen: 'CourseList', params: { regionId: r.id, regionName: r.name } })
   }
   function openMarketplace() {
@@ -66,6 +67,13 @@ export function HomeScreen({ navigation }: Props) {
         </ScrollView>
       </Section>
 
+      {/* 유튜브 여행 쇼츠 피드 */}
+      {data.shortsFeed?.length > 0 && (
+        <Section title="🎬 여행 쇼츠">
+          <VideoRail videos={data.shortsFeed} />
+        </Section>
+      )}
+
       <Section title="어디로 떠날까요">
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: space(3) }}>
           {data.popularRegions.map((r) => (
@@ -76,6 +84,25 @@ export function HomeScreen({ navigation }: Props) {
           ))}
         </View>
       </Section>
+
+      {/* 유튜브 화제도 기반 '요즘 뜨는 여행지' */}
+      {data.trendingRegions?.length > 0 && (
+        <Section title="🔥 요즘 뜨는 여행지">
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space(3) }}>
+            {data.trendingRegions.map((r) => (
+              <Pressable key={r.id} onPress={() => openRegion(r)} style={{ width: 120 }}>
+                <Card>
+                  {r.thumbnail ? <Image source={{ uri: r.thumbnail }} style={{ height: 80, width: '100%' }} /> : <ImagePlaceholder height={80} />}
+                  <View style={{ padding: space(3), flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <Text style={styles.cardTitle}>{r.name}</Text>
+                    <Text style={{ fontSize: 11, color: colors.primary, fontWeight: '700' }}>🔥{r.buzzScore}</Text>
+                  </View>
+                </Card>
+              </Pressable>
+            ))}
+          </ScrollView>
+        </Section>
+      )}
 
       {/* 커뮤니티: 사용자가 공유한 여행팩(자랑) */}
       {communityPacks.length > 0 && (

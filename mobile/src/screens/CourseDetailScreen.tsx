@@ -6,6 +6,7 @@ import { api, ApiError } from '../api/client'
 import { useAuth } from '../auth/AuthContext'
 import { Button, Card, ImagePlaceholder, Loading, EmptyState, Pill, Badge } from '../components/ui'
 import { HeroSlideshow } from '../components/HeroSlideshow'
+import { VideoRail } from '../components/VideoRail'
 import { MapView } from '../components/MapView'
 import { BookmarkButton } from '../components/BookmarkButton'
 import { colors, space } from '../theme'
@@ -154,6 +155,8 @@ export function CourseDetailScreen({ navigation, route }: Props) {
             <MapView lat={mapSpots[0]!.lat!} lng={mapSpots[0]!.lng!} height={160} style={{ marginTop: 4 }}
               markers={mapSpots.map((s) => ({ lat: s.lat!, lng: s.lng!, label: s.name }))} />
           )}
+
+          {data.videos?.length > 0 && <VideoRail title="🎬 여행 영상" videos={data.videos} />}
 
           <Pressable
             style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 6 }}
