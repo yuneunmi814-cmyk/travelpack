@@ -262,3 +262,7 @@ PostgreSQL 16 + PostGIS · Redis 7 · JWT(RS256)+RTR · Kakao Maps(WebView JS SD
 ## 라이선스
 
 [MIT](LICENSE) © 2026 TravelPack
+
+openclaw 원격 코딩 테스트
+
+푸시 테스트
