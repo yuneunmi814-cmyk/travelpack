@@ -1,14 +1,14 @@
-import { useState } from 'react'
-import { FlatList, Image, Modal, Pressable, StyleSheet, Text, View } from 'react-native'
-import { WebView } from 'react-native-webview'
+import { FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native'
+import * as WebBrowser from 'expo-web-browser'
 import { colors, space } from '../theme'
 import type { VideoCard } from '../api/types'
 
-// 유튜브 여행영상(쇼츠) 가로 레일 — 썸네일 탭 시 인앱 WebView 플레이어(공식 임베드).
-// react-native-webview만 사용(추가 네이티브 의존성 없음).
+// 유튜브 여행영상(쇼츠) 가로 레일. 탭 시 인앱 브라우저(Custom Tab)로 유튜브 재생.
+// (쇼츠는 유튜브가 외부 앱 IFrame 임베드 재생을 막아 오류 152가 나므로, 인앱 브라우저로 여는 게 안정적)
 export function VideoRail({ videos, title }: { videos: VideoCard[]; title?: string }) {
-  const [playing, setPlaying] = useState<VideoCard | null>(null)
   if (!videos || videos.length === 0) return null
+  const open = (v: VideoCard) =>
+    WebBrowser.openBrowserAsync(`https://www.youtube.com/watch?v=${v.youtubeId}`).catch(() => {})
 
   return (
     <View style={{ gap: space(3) }}>
@@ -20,7 +20,7 @@ export function VideoRail({ videos, title }: { videos: VideoCard[]; title?: stri
         keyExtractor={(v) => v.id}
         contentContainerStyle={{ gap: space(3) }}
         renderItem={({ item }) => (
-          <Pressable onPress={() => setPlaying(item)} style={styles.card}>
+          <Pressable onPress={() => open(item)} style={styles.card}>
             <View>
               {item.thumbnail ? (
                 <Image source={{ uri: item.thumbnail }} style={styles.thumb} />
@@ -39,51 +39,8 @@ export function VideoRail({ videos, title }: { videos: VideoCard[]; title?: stri
           </Pressable>
         )}
       />
-
-      <Modal visible={!!playing} animationType="slide" transparent onRequestClose={() => setPlaying(null)}>
-        <View style={styles.modalBg}>
-          <Pressable style={{ flex: 1 }} onPress={() => setPlaying(null)} />
-          <View style={styles.playerWrap}>
-            <View style={styles.playerBar}>
-              <Text numberOfLines={1} style={styles.playerTitle}>{playing?.title}</Text>
-              <Pressable hitSlop={10} onPress={() => setPlaying(null)}><Text style={styles.close}>✕</Text></Pressable>
-            </View>
-            {playing && (
-              <WebView
-                source={{ html: playerHtml(playing.youtubeId), baseUrl: 'https://www.youtube.com' }}
-                originWhitelist={['*']}
-                style={{ flex: 1, backgroundColor: '#000' }}
-                javaScriptEnabled
-                domStorageEnabled
-                allowsFullscreenVideo
-                allowsInlineMediaPlayback
-                mediaPlaybackRequiresUserAction={false}
-                // 유튜브 앱으로 튕기지 않게 — 플레이어(youtube.com) 외 이동 차단
-                onShouldStartLoadWithRequest={(r) => r.url.includes('youtube.com') || r.url.includes('youtube-nocookie.com') || r.url === 'about:blank' || r.url.startsWith('data:')}
-              />
-            )}
-          </View>
-          <Pressable style={{ flex: 1 }} onPress={() => setPlaying(null)} />
-        </View>
-      </Modal>
     </View>
   )
-}
-
-// YouTube IFrame Player API HTML — 앱 내(WebView) 인라인 재생(쇼츠 포함). /embed/ URL보다 안정적.
-function playerHtml(id: string): string {
-  return `<!DOCTYPE html><html><head>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<style>html,body{margin:0;background:#000;height:100%;overflow:hidden}#p,iframe{width:100%;height:100%;border:0}</style>
-</head><body><div id="p"></div>
-<script>
-  var t=document.createElement('script');t.src="https://www.youtube.com/iframe_api";document.head.appendChild(t);
-  function onYouTubeIframeAPIReady(){
-    new YT.Player('p',{width:'100%',height:'100%',videoId:'${id}',
-      playerVars:{playsinline:1,autoplay:1,rel:0,modestbranding:1,fs:1},
-      events:{onReady:function(e){e.target.playVideo();}}});
-  }
-</script></body></html>`
 }
 
 function fmtDur(sec: number): string {
@@ -113,9 +70,4 @@ const styles = StyleSheet.create({
   durText: { color: '#fff', fontSize: 10, fontWeight: '600' },
   vtitle: { fontSize: 12, fontWeight: '600', color: colors.text, marginTop: 6, lineHeight: 16 },
   meta: { fontSize: 11, color: colors.textHint, marginTop: 2 },
-  modalBg: { flex: 1, backgroundColor: 'rgba(0,0,0,0.85)' },
-  playerWrap: { height: 320, backgroundColor: '#000' },
-  playerBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: space(4), paddingVertical: 10, gap: 12 },
-  playerTitle: { flex: 1, color: '#fff', fontSize: 13, fontWeight: '600' },
-  close: { color: '#fff', fontSize: 18, fontWeight: '700' },
 })
