@@ -7,6 +7,7 @@ import { created, h, noContent, ok } from '../../lib/respond.js'
 import { validateBody } from '../../middleware/validate.js'
 import { requireUser } from '../../middleware/auth.js'
 import { nextCursorOf, parseId, parsePage, sanitizeText } from '../../lib/util.js'
+import { buildCourseFromVideo } from '../aicourse/from-video.js'
 
 // 크리에이터(일반 사용자)가 자신만의 여행팩(코스)을 만들어 검수 요청하는 API.
 // 발행은 관리자 CMS의 기존 4-eyes 워크플로가 담당(작성자=사용자, 승인자=관리자라 자연 분리).
@@ -214,6 +215,20 @@ creatorRouter.post(
       include: fullInclude,
     })
     created(res, serializeMyCourse(course))
+  }),
+)
+
+// 영상(유튜브/틱톡) URL → AI(Gemini)가 장소 추출 → 좌표 붙여 DRAFT 코스 자동생성.
+// 인스타 등 캡션을 못 읽는 경우 caption에 본문을 함께 보내면 처리.
+const fromVideoSchema = z.object({ url: z.string().min(5).max(500), caption: z.string().max(5000).optional() })
+creatorRouter.post(
+  '/me/courses/from-video',
+  requireUser,
+  validateBody(fromVideoSchema),
+  h(async (req, res) => {
+    const { url, caption } = req.body as z.infer<typeof fromVideoSchema>
+    const r = await buildCourseFromVideo(prisma, req.userId!, url, caption)
+    created(res, { courseId: r.courseId.toString(), title: r.title, region: r.region, spotCount: r.spotCount, skipped: r.skipped })
   }),
 )
 

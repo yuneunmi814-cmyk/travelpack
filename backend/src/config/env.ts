@@ -17,6 +17,10 @@ const schema = z.object({
   TOURAPI_SERVICE_KEY: z.string().optional().or(z.literal('')),
   // YouTube Data API v3 (여행영상 큐레이션 sync) — 비우면 sync:youtube 스킵
   YOUTUBE_API_KEY: z.string().optional().or(z.literal('')),
+  // Gemini API (영상→코스 자동생성: 캡션에서 장소 추출) — 비우면 from-video 503
+  GEMINI_API_KEY: z.string().optional().or(z.literal('')),
+  // Kakao 로컬(장소검색) REST 키 — 맛집·카페 좌표. 비우면 TourAPI 폴백
+  KAKAO_REST_API_KEY: z.string().optional().or(z.literal('')),
   RATE_LIMIT_GUEST_PER_MIN: z.coerce.number().default(30),
   RATE_LIMIT_USER_PER_MIN: z.coerce.number().default(60),
   // S3 업로드 (비우면 /uploads/presigned-url 503)
