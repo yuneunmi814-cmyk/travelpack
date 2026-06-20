@@ -50,13 +50,16 @@ export function VideoRail({ videos, title }: { videos: VideoCard[]; title?: stri
             </View>
             {playing && (
               <WebView
-                source={{ uri: `https://www.youtube.com/embed/${playing.youtubeId}?autoplay=1&playsinline=1&rel=0&modestbranding=1` }}
+                source={{ html: playerHtml(playing.youtubeId), baseUrl: 'https://www.youtube.com' }}
+                originWhitelist={['*']}
                 style={{ flex: 1, backgroundColor: '#000' }}
                 javaScriptEnabled
                 domStorageEnabled
                 allowsFullscreenVideo
                 allowsInlineMediaPlayback
                 mediaPlaybackRequiresUserAction={false}
+                // 유튜브 앱으로 튕기지 않게 — 플레이어(youtube.com) 외 이동 차단
+                onShouldStartLoadWithRequest={(r) => r.url.includes('youtube.com') || r.url.includes('youtube-nocookie.com') || r.url === 'about:blank' || r.url.startsWith('data:')}
               />
             )}
           </View>
@@ -65,6 +68,22 @@ export function VideoRail({ videos, title }: { videos: VideoCard[]; title?: stri
       </Modal>
     </View>
   )
+}
+
+// YouTube IFrame Player API HTML — 앱 내(WebView) 인라인 재생(쇼츠 포함). /embed/ URL보다 안정적.
+function playerHtml(id: string): string {
+  return `<!DOCTYPE html><html><head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<style>html,body{margin:0;background:#000;height:100%;overflow:hidden}#p,iframe{width:100%;height:100%;border:0}</style>
+</head><body><div id="p"></div>
+<script>
+  var t=document.createElement('script');t.src="https://www.youtube.com/iframe_api";document.head.appendChild(t);
+  function onYouTubeIframeAPIReady(){
+    new YT.Player('p',{width:'100%',height:'100%',videoId:'${id}',
+      playerVars:{playsinline:1,autoplay:1,rel:0,modestbranding:1,fs:1},
+      events:{onReady:function(e){e.target.playVideo();}}});
+  }
+</script></body></html>`
 }
 
 function fmtDur(sec: number): string {
