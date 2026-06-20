@@ -22,6 +22,8 @@ interface VideoSeed {
 }
 const VIDEO_SEED: VideoSeed = JSON.parse(readFileSync(new URL('./seed-videos.json', import.meta.url), 'utf8'))
 
+import { applyYoutubeCourses } from './youtube-courses-loader.js'
+
 // KTO 코스 제목/요약 키워드로 테마(8종 중 1~2개) 추론 — 홈 테마섹션·추천 노출용
 function inferKtoThemes(text: string): string[] {
   const picks: string[] = []
@@ -353,6 +355,12 @@ export async function runSeed(prisma: PrismaClient, adminPassword: string, round
         },
       })
     }
+  }
+
+  // 유튜브 추천 코스 — 코스형 쇼츠에서 뽑은 장소로 조립('🎬 유튜브 추천 코스'). 전체 시드에서만.
+  if (opts.regions) {
+    const ytCount = await applyYoutubeCourses(prisma, editor.id, themes)
+    if (ytCount) console.log(`  🎬 유튜브 추천 코스 ${ytCount}개`)
   }
 
   // 지역 썸네일 백필 — 탐색/홈 지역 카드 이미지. 대표 코스 커버 → 없으면 지역 스팟 이미지 순.
