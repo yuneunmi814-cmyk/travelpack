@@ -2,10 +2,12 @@ import { useState } from 'react'
 import { Dimensions, Pressable, ScrollView, Text, View, Image, StyleSheet } from 'react-native'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useResource } from '../api/useResource'
-import { Card, ImagePlaceholder, Loading, EmptyState, Badge } from '../components/ui'
+import { Button, Card, ImagePlaceholder, Loading, EmptyState, Badge } from '../components/ui'
 import { BookmarkButton } from '../components/BookmarkButton'
+import { openDirections } from '../lib/directions'
 import { AudioGuideList } from '../components/AudioGuideList'
 import { VideoRail } from '../components/VideoRail'
+import { MapView } from '../components/MapView'
 import { colors, space } from '../theme'
 import type { ExploreStackParams } from '../navigation/types'
 import type { SpotDetail } from '../api/types'
@@ -68,6 +70,10 @@ export function SpotDetailScreen({ navigation, route }: Props) {
           {data.address && <Row label="주소" value={data.address} />}
           {data.phone && <Row label="전화" value={data.phone} />}
         </Card>
+
+        <Button title="🧭 길찾기 (지도 앱으로 안내)" kind="navy" onPress={() => openDirections(data.lat, data.lng, data.name)} />
+
+        <MapView lat={data.lat} lng={data.lng} markers={[{ lat: data.lat, lng: data.lng, label: data.name }]} height={160} zoomLevel={15} />
 
         {data.tips && (
           <View style={styles.tip}>

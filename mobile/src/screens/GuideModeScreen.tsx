@@ -1,6 +1,7 @@
-import { useState } from 'react'
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { useEffect, useState } from 'react'
+import { Alert, Linking, ScrollView, StyleSheet, Text, View } from 'react-native'
 import * as Location from 'expo-location'
+import { openDirections } from '../lib/directions'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useResource } from '../api/useResource'
 import { api, ApiError } from '../api/client'
@@ -33,6 +34,20 @@ export function GuideModeScreen({ route }: Props) {
   const { data, loading, error, reload } = useResource<Trip>(`/trips/${tripId}`, { auth: true, deps: [tripId] })
   const [busy, setBusy] = useState(false)
   const [placing, setPlacing] = useState(false)
+
+  // 가이드 진입 시 위치 권한을 미리 요청(체크인 직전에야 묻지 않도록). 영구 거부 상태면 설정으로 안내.
+  useEffect(() => {
+    Location.requestForegroundPermissionsAsync()
+      .then((perm) => {
+        if (!perm.granted && !perm.canAskAgain) {
+          Alert.alert('위치 권한 필요', '체크인하려면 설정에서 위치 권한을 허용해주세요.', [
+            { text: '나중에', style: 'cancel' },
+            { text: '설정 열기', onPress: () => Linking.openSettings() },
+          ])
+        }
+      })
+      .catch(() => {})
+  }, [])
 
   if (loading) return <Loading />
   if (error || !data) return <EmptyState text={error ?? '불러오기 실패'} />
@@ -105,6 +120,7 @@ export function GuideModeScreen({ route }: Props) {
           <Text style={{ fontWeight: '700', fontSize: 16, color: colors.text }}>{next.spot.name}</Text>
           <Text style={{ color: colors.textSub }}>{next.spot.category}</Text>
           <Button title={busy ? '확인 중…' : '도착했어요 (체크인)'} onPress={() => checkIn(false)} disabled={busy} style={{ marginTop: 8 }} />
+          <Button title="🧭 길찾기 (지도 앱으로 안내)" onPress={() => openDirections(next.spot.lat, next.spot.lng, next.spot.name)} kind="navy" />
           <Button title="이번 장소 건너뛰기" onPress={skip} kind="ghost" disabled={busy} />
         </Card>
       ) : (
