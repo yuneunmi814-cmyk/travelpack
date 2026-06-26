@@ -13,6 +13,21 @@ import type { CheckInResult, Trip } from '../api/types'
 
 type Props = NativeStackScreenProps<TripsStackParams, 'GuideMode'>
 
+// 체크인용 위치 읽기 — 지오펜스 판정이라 고정밀(GPS)이 적합.
+// 8초 내 못 받으면 최근 캐시 위치로 폴백해 무한 대기를 막는다(실내·에뮬레이터 대비).
+async function readPosition(): Promise<Location.LocationObject> {
+  try {
+    return await Promise.race([
+      Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High }),
+      new Promise<never>((_, reject) => setTimeout(() => reject(new Error('timeout')), 8000)),
+    ])
+  } catch {
+    const last = await Location.getLastKnownPositionAsync({})
+    if (last) return last
+    throw new Error('위치를 가져올 수 없어요. 잠시 후 다시 시도해주세요.')
+  }
+}
+
 export function GuideModeScreen({ route }: Props) {
   const { tripId } = route.params
   const { data, loading, error, reload } = useResource<Trip>(`/trips/${tripId}`, { auth: true, deps: [tripId] })
@@ -33,7 +48,7 @@ export function GuideModeScreen({ route }: Props) {
         Alert.alert('위치 권한 필요', '체크인하려면 위치 권한을 허용해주세요.')
         return
       }
-      const pos = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced })
+      const pos = await readPosition()
       const res = await api<CheckInResult>(`/trips/${tripId}/visits/${next!.id}/check-in`, {
         method: 'POST', auth: true,
         body: { lat: pos.coords.latitude, lng: pos.coords.longitude, accuracy: pos.coords.accuracy ?? undefined, force },
