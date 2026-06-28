@@ -24,7 +24,7 @@ export function SearchScreen({ navigation }: Props) {
     setLoading(true)
     const t = setTimeout(() => {
       api<SearchResult>(`/search?q=${encodeURIComponent(term)}`)
-        .then((r) => { if (alive) { setData(r); setError(null) } })
+        .then((r) => { if (alive) { setData({ courses: r?.courses ?? [], spots: r?.spots ?? [], regions: r?.regions ?? [] }); setError(null) } })
         .catch((e) => { if (alive) setError(e instanceof ApiError ? e.message : '검색 실패') })
         .finally(() => { if (alive) setLoading(false) })
     }, 300)
@@ -55,6 +55,8 @@ export function SearchScreen({ navigation }: Props) {
         <EmptyState text={error} />
       ) : empty ? (
         <EmptyState text={`'${q.trim()}' 검색 결과가 없어요`} />
+      ) : !data ? (
+        <Loading />
       ) : (
         <ScrollView contentContainerStyle={{ padding: space(4), paddingTop: 0, gap: space(4) }}>
           {data!.regions.length > 0 && (
